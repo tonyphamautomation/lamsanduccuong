@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Liên hệ – Lâm Sản Đức Cường</title>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Be Vietnam Pro', sans-serif; color: #1C1C1E; background: #fff; }
+    a { transition: opacity 0.2s; }
+    a:hover { opacity: 0.8; }
+
+    /* Nav mobile */
+    @media (max-width: 900px) {
+      .nav-links { display: none !important; }
+      .nav-search { display: none !important; }
+      nav { padding: 0 1.5rem !important; }
+    }
+
+    /* Page header */
+    .page-header {
+      background: linear-gradient(135deg, #1C1C1E 0%, #2d2d30 100%);
+      padding: 4rem 5rem;
+      text-align: center;
+    }
+    .page-header .breadcrumb {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 1rem;
+      letter-spacing: 0.06em;
+    }
+    .page-header h1 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 0.8rem;
+    }
+    .page-header h1 span { color: #F59B00; }
+    .page-header p {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.5);
+    }
+
+    /* Main layout */
+    .contact-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 3rem;
+    }
+    @media (max-width: 860px) {
+      .contact-section { grid-template-columns: 1fr; padding: 2rem 1.2rem; }
+      .page-header { padding: 3rem 1.5rem; }
+    }
+
+    /* Info blocks */
+    .info-block {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1.2rem;
+      border-radius: 10px;
+      background: #F9FAFB;
+      border: 1px solid #E5E7EB;
+      margin-bottom: 1rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .info-block:hover {
+      border-color: #F59B00;
+      box-shadow: 0 4px 16px rgba(245,155,0,0.1);
+    }
+    .info-icon {
+      width: 42px;
+      height: 42px;
+      background: #FFF8EC;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 1.1rem;
+    }
+    .info-block h4 {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: #6B7280;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.3rem;
+    }
+    .info-block p, .info-block a {
+      font-size: 0.88rem;
+      color: #1C1C1E;
+      font-weight: 500;
+      text-decoration: none;
+      display: block;
+      line-height: 1.6;
+    }
+    .info-block a:hover { color: #F59B00; opacity: 1; }
+
+    /* Map placeholder */
+    .map-placeholder {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #E5E7EB;
+      margin-top: 1.5rem;
+      height: 220px;
+      background: linear-gradient(135deg, #f0ede8, #e8e2da);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+      cursor: pointer;
+      transition: box-shadow 0.2s;
+      text-decoration: none;
+    }
+    .map-placeholder:hover {
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+      opacity: 1;
+    }
+    .map-placeholder .map-icon {
+      width: 48px;
+      height: 48px;
+      background: #F59B00;
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(-45deg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .map-placeholder .map-icon svg { transform: rotate(45deg); }
+    .map-placeholder p {
+      font-size: 0.82rem;
+      color: #6B7280;
+      font-weight: 500;
+      text-align: center;
+      padding: 0 1rem;
+    }
+    .map-placeholder span {
+      font-size: 0.72rem;
+      color: #F59B00;
+      font-weight: 600;
+    }
+
+    /* Form card */
+    .form-card {
+      background: #fff;
+      border: 1px solid #E5E7EB;
+      border-radius: 16px;
+      padding: 2rem 2rem;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.05);
+    }
+    .form-card h2 {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: #1C1C1E;
+      margin-bottom: 0.4rem;
+    }
+    .form-card .form-subtitle {
+      font-size: 0.82rem;
+      color: #6B7280;
+      margin-bottom: 1.8rem;
+      line-height: 1.6;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    @media (max-width: 500px) {
+      .form-row { grid-template-columns: 1fr; }
+    }
+    .form-group { margin-bottom: 1rem; }
+    .form-group label {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #1C1C1E;
+      margin-bottom: 0.4rem;
+    }
+    .form-group label span { color: #F59B00; }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      border: 1.5px solid #E5E7EB;
+      border-radius: 8px;
+      padding: 0.65rem 0.9rem;
+      font-size: 0.85rem;
+      font-family: 'Be Vietnam Pro', sans-serif;
+      color: #1C1C1E;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      background: #fff;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: #F59B00;
+      box-shadow: 0 0 0 3px rgba(245,155,0,0.12);
+    }
+    .form-group textarea { resize: vertical; min-height: 110px; }
+    .form-group select { cursor: pointer; }
+    .btn-submit {
+      width: 100%;
+      background: #F59B00;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 0.9rem;
+      font-size: 0.9rem;
+      font-weight: 700;
+      font-family: 'Be Vietnam Pro', sans-serif;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      margin-top: 0.5rem;
+    }
+    .btn-submit:hover { background: #CC7A00; transform: translateY(-1px); }
+    .btn-submit:active { transform: translateY(0); }
+    .form-note {
+      margin-top: 1rem;
+      font-size: 0.76rem;
+      color: #6B7280;
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    /* Quick contact cards */
+    .quick-contact {
+      max-width: 1200px;
+      margin: 0 auto 4rem;
+      padding: 0 2rem;
+    }
+    .quick-contact h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #1C1C1E;
+      margin-bottom: 1.2rem;
+      text-align: center;
+    }
+    .quick-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    @media (max-width: 640px) {
+      .quick-cards { grid-template-columns: 1fr; }
+    }
+    .quick-card {
+      border: 1.5px solid #E5E7EB;
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: center;
+      text-decoration: none;
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+      display: block;
+    }
+    .quick-card:hover {
+      border-color: #F59B00;
+      box-shadow: 0 8px 24px rgba(245,155,0,0.12);
+      transform: translateY(-3px);
+      opacity: 1;
+    }
+    .quick-card .qc-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 0.8rem;
+      font-size: 1.4rem;
+    }
+    .quick-card h4 {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #1C1C1E;
+      margin-bottom: 0.3rem;
+    }
+    .quick-card p {
+      font-size: 0.78rem;
+      color: #6B7280;
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav style="position:sticky;top:0;z-index:200;background:#fff;border-bottom:1px solid #E5E7EB;padding:0 5rem;height:68px;display:flex;align-items:center;justify-content:space-between;gap:2rem">
+  <a href="duc-cuong-wood.html" style="display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0">
+    <img src="logo.png" style="height:46px;width:auto;object-fit:contain" alt="Logo" onerror="this.style.display='none'">
+    <div style="line-height:1.2">
+      <div style="font-weight:800;font-size:0.95rem;color:#1C1C1E;letter-spacing:0.02em">LÂM SẢN ĐỨC CƯỜNG</div>
+      <div style="font-size:0.58rem;color:#F59B00;letter-spacing:0.18em;text-transform:uppercase">WOOD EXCELLENCE</div>
+    </div>
+  </a>
+  <ul class="nav-links" style="display:flex;gap:1.8rem;list-style:none;margin:0;padding:0">
+    <li><a href="duc-cuong-wood.html" style="font-size:0.82rem;font-weight:500;color:#6B7280;text-decoration:none">Trang chủ</a></li>
+    <li><a href="san-pham.html" style="font-size:0.82rem;font-weight:500;color:#6B7280;text-decoration:none">Sản phẩm</a></li>
+    <li><a href="dich-vu.html" style="font-size:0.82rem;font-weight:500;color:#6B7280;text-decoration:none">Dịch vụ</a></li>
+    <li><a href="du-an.html" style="font-size:0.82rem;font-weight:500;color:#6B7280;text-decoration:none">Dự án</a></li>
+    <li><a href="tin-tuc.html" style="font-size:0.82rem;font-weight:500;color:#6B7280;text-decoration:none">Tin tức</a></li>
+    <li><a href="lien-he.html" style="font-size:0.82rem;font-weight:500;color:#F59B00;text-decoration:none;font-weight:700">Liên hệ</a></li>
+  </ul>
+  <div class="nav-search" style="display:flex;align-items:center;gap:1rem;flex-shrink:0">
+    <div style="position:relative">
+      <input type="text" placeholder="Tìm sản phẩm..." style="border:1px solid #E5E7EB;border-radius:6px;padding:0.5rem 0.8rem 0.5rem 2.2rem;font-size:0.8rem;color:#1C1C1E;outline:none;width:180px;font-family:inherit">
+      <svg style="position:absolute;left:8px;top:50%;transform:translateY(-50%);opacity:0.4" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1C1C1E" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    </div>
+    <a href="lien-he.html" style="background:#F59B00;color:#fff;padding:0.55rem 1.4rem;border-radius:6px;font-size:0.8rem;font-weight:700;text-decoration:none;white-space:nowrap">Nhận báo giá</a>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="breadcrumb">Trang chủ &rsaquo; Liên hệ</div>
+  <h1>Liên hệ với <span>chúng tôi</span></h1>
+  <p>Phản hồi trong 30 phút giờ làm việc. Chúng tôi luôn sẵn sàng tư vấn miễn phí.</p>
+</div>
+
+<!-- MAIN CONTACT SECTION -->
+<div class="contact-section">
+
+  <!-- LEFT: Info + Map -->
+  <div>
+    <h3 style="font-size:1rem;font-weight:700;color:#1C1C1E;margin-bottom:1.2rem">Thông tin liên hệ</h3>
+
+    <div class="info-block">
+      <div class="info-icon">📞</div>
+      <div>
+        <h4>Điện thoại</h4>
+        <a href="tel:0969910136">0969.910.136 – Anh Cường</a>
+        <a href="tel:0983832136">0983.832.136 – Hỗ trợ</a>
+      </div>
+    </div>
+
+    <div class="info-block">
+      <div class="info-icon">📍</div>
+      <div>
+        <h4>Địa chỉ xưởng</h4>
+        <p>Thôn Minh Hùng, Xã Vạn Lộc</p>
+        <p>Tỉnh Thanh Hóa</p>
+      </div>
+    </div>
+
+    <div class="info-block">
+      <div class="info-icon">🕐</div>
+      <div>
+        <h4>Giờ làm việc</h4>
+        <p>Thứ 2 – Thứ 7: 7:00 – 18:00</p>
+        <p>Chủ nhật: 7:00 – 12:00</p>
+      </div>
+    </div>
+
+    <div class="info-block">
+      <div class="info-icon">💬</div>
+      <div>
+        <h4>Zalo / Nhắn tin</h4>
+        <a href="https://zalo.me/0969910136" target="_blank">zalo.me/0969910136</a>
+        <p style="font-size:0.78rem;color:#6B7280;margin-top:0.2rem">Phản hồi nhanh nhất qua Zalo</p>
+      </div>
+    </div>
+
+    <!-- Map embed -->
+    <div style="border-radius:12px;overflow:hidden;border:1px solid #E5E7EB;margin-top:1.5rem">
+  <iframe
+    src="https://maps.google.com/maps?q=WWGV%2BRQW,+V%E1%BA%A1n+L%E1%BB%99c,+Thanh+H%C3%B3a,+Vi%E1%BB%87t+Nam&output=embed&hl=vi&z=16"
+    width="100%" height="320" style="border:0;display:block"
+    allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+  </iframe>
+  <div style="background:#F9FAFB;padding:0.8rem 1rem;display:flex;align-items:center;gap:8px;border-top:1px solid #E5E7EB">
+    <span style="font-size:0.8rem;color:#6B7280">📍 WWGV+RQW, Thôn Minh Hùng, Xã Vạn Lộc, Thanh Hóa</span>
+    <a href="https://maps.google.com/maps?q=WWGV%2BRQW,+V%E1%BA%A1n+L%E1%BB%99c,+Thanh+H%C3%B3a" target="_blank" style="margin-left:auto;font-size:0.75rem;color:#F59B00;font-weight:600;text-decoration:none;white-space:nowrap">Mở Google Maps →</a>
+  </div>
+</div>
+  </div>
+
+  <!-- RIGHT: Form -->
+  <div>
+    <div class="form-card">
+      <h2>Gửi yêu cầu báo giá</h2>
+      <p class="form-subtitle">Điền thông tin bên dưới, chúng tôi sẽ liên hệ lại trong vòng 30 phút giờ làm việc.</p>
+
+      <form onsubmit="event.preventDefault(); window.open('https://zalo.me/0969910136','_blank')">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Họ và tên <span>*</span></label>
+            <input type="text" placeholder="Nguyễn Văn A" required>
+          </div>
+          <div class="form-group">
+            <label>Số điện thoại <span>*</span></label>
+            <input type="tel" placeholder="0912 345 678" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" placeholder="email@example.com">
+        </div>
+
+        <div class="form-group">
+          <label>Nhu cầu của bạn <span>*</span></label>
+          <select required>
+            <option value="" disabled selected>-- Chọn nhu cầu --</option>
+            <optgroup label="Mua gỗ">
+              <option>Gỗ Lim khối</option>
+              <option>Gỗ Sến khối</option>
+              <option>Gỗ Táu khối</option>
+              <option>Gỗ xẻ tấm</option>
+              <option>Gỗ hộp các loại</option>
+            </optgroup>
+            <optgroup label="Dịch vụ">
+              <option>Thi công nhà gỗ truyền thống</option>
+              <option>Nội thất gỗ cao cấp</option>
+              <option>Cửa gỗ chạm khắc</option>
+              <option>Đồ thờ tự & mỹ nghệ</option>
+              <option>Cưa xẻ theo yêu cầu</option>
+            </optgroup>
+            <option>Khác</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Mô tả chi tiết yêu cầu</label>
+          <textarea placeholder="Ví dụ: Cần 2m³ gỗ Lim xẻ hộp 10x10cm dài 4m, giao tại Hà Nội..."></textarea>
+        </div>
+
+        <button type="submit" class="btn-submit">Gửi yêu cầu →</button>
+      </form>
+
+      <p class="form-note">Hoặc liên hệ trực tiếp qua <strong style="color:#F59B00">Zalo</strong> / <strong style="color:#F59B00">điện thoại</strong> để được tư vấn ngay.<br>Chúng tôi không spam, thông tin của bạn được bảo mật.</p>
+    </div>
+  </div>
+</div>
+
+<!-- QUICK CONTACT CARDS -->
+<div class="quick-contact">
+  <h3>Liên hệ nhanh</h3>
+  <div class="quick-cards">
+
+    <a href="tel:0969910136" class="quick-card">
+      <div class="qc-icon" style="background:#FFF8EC;">📞</div>
+      <h4>Gọi điện</h4>
+      <p>0969.910.136</p>
+      <p style="color:#F59B00;font-weight:600;font-size:0.78rem;margin-top:0.5rem">Nhấn để gọi →</p>
+    </a>
+
+    <a href="https://zalo.me/0969910136" target="_blank" class="quick-card">
+      <div class="qc-icon" style="background:#e8f4fd;">💬</div>
+      <h4>Nhắn Zalo</h4>
+      <p>Phản hồi trong 5 phút</p>
+      <p style="color:#F59B00;font-weight:600;font-size:0.78rem;margin-top:0.5rem">Mở Zalo →</p>
+    </a>
+
+    <a href="https://maps.google.com/?q=Thon+Minh+Hung+Xa+Van+Loc+Thanh+Hoa" target="_blank" class="quick-card">
+      <div class="qc-icon" style="background:#f0fdf4;">📍</div>
+      <h4>Đến xưởng</h4>
+      <p>Thôn Minh Hùng, Vạn Lộc</p>
+      <p style="color:#F59B00;font-weight:600;font-size:0.78rem;margin-top:0.5rem">Xem bản đồ →</p>
+    </a>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer style="background:#1C1C1E;color:#fff;padding:4rem 5rem 2rem">
+  <div style="display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem">
+    <div>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:1rem">
+        <div style="width:32px;height:32px;background:#F59B00;display:flex;align-items:center;justify-content:center;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <div style="font-weight:800;font-size:1rem;color:#fff">LÂM SẢN ĐỨC CƯỜNG</div>
+      </div>
+      <p style="font-size:0.8rem;color:rgba(255,255,255,0.4);line-height:1.9;max-width:260px">Chuyên cung cấp gỗ khối, gỗ xẻ và đồ nội thất gỗ tự nhiên cao cấp. Hơn 20 năm uy tín tại Thanh Hóa.</p>
+      <div style="margin-top:1.2rem;display:flex;gap:0.8rem">
+        <a href="tel:0969910136" style="background:#F59B00;color:#fff;padding:0.5rem 1rem;border-radius:4px;font-size:0.75rem;font-weight:700;text-decoration:none">📞 0969.910.136</a>
+        <a href="https://zalo.me/0969910136" target="_blank" style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);padding:0.5rem 1rem;border-radius:4px;font-size:0.75rem;font-weight:600;text-decoration:none">Zalo</a>
+      </div>
+    </div>
+    <div>
+      <h5 style="font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:1.2rem;font-weight:600">Sản phẩm</h5>
+      <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:0.7rem">
+        <li><a href="san-pham.html" style="font-size:0.82rem;color:rgba(255,255,255,0.5);text-decoration:none">Gỗ Lim khối</a></li>
+        <li><a href="san-pham.html" style="font-size:0.82rem;color:rgba(255,255,255,0.5);text-decoration:none">Gỗ Sến khối</a></li>
+        <li><a href="san-pham.html" style="font-size:0.82rem;color:rgba(255,255,255,0.5);text-decoration:none">Nội thất gỗ</a></li>
+        <li><a href="san-pham.html" style="font-size:0.82rem;color:rgba(255,255,255,0.5);text-decoration:none">Cửa chạm khắc</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5 style="font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:1.2rem;font-weight:600">Dịch vụ</h5>
+      <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:0.7rem">
+        <li><a href="dich-vu.html" style="font-size:0.82rem;color:rgba(255,255,255,0.5);text-decoration:none">Cưa xẻ theo yêu cầu</a></li>
+        <li><a href="dich-vu.html" style="font-size:0.82rem;color:rgba(255,255,255,0.5);text-decoration:none">Chạm khắc thủ công</a></li>
+        <li><a href="dich-vu.html" style="font-size:0.82rem;color:rgba(255,255,255,0.5);text-decoration:none">Thi công nội thất</a></li>
+        <li><a href="dich-vu.html" style="font-size:0.82rem;color:rgba(255,255,255,0.5);text-decoration:none">Nhà gỗ truyền thống</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5 style="font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:1.2rem;font-weight:600">Liên hệ</h5>
+      <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:0.7rem">
+        <li style="font-size:0.82rem;color:rgba(255,255,255,0.5)">📞 0969.910.136</li>
+        <li style="font-size:0.82rem;color:rgba(255,255,255,0.5)">📞 0983.832.136</li>
+        <li style="font-size:0.82rem;color:rgba(255,255,255,0.5)">📍 Thôn Minh Hùng, Xã Vạn Lộc</li>
+        <li style="font-size:0.82rem;color:rgba(255,255,255,0.5)">🕐 T2-T7: 7:00–18:00</li>
+      </ul>
+    </div>
+  </div>
+  <div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem">
+    <p style="font-size:0.72rem;color:rgba(255,255,255,0.2)">© 2025 Công Ty TNHH Lâm Sản Đức Cường · MST: 2802151649</p>
+    <p style="font-size:0.72rem;color:#F59B00">Chất lượng là danh dự</p>
+  </div>
+</footer>
+
+<!-- FLOATING CTA -->
+<div style="position:fixed;bottom:2rem;right:2rem;z-index:300;display:flex;flex-direction:column;gap:0.6rem;align-items:flex-end">
+  <a href="tel:0969910136" style="display:flex;align-items:center;gap:8px;background:#F59B00;color:#fff;padding:0.7rem 1.2rem;border-radius:6px;font-size:0.78rem;font-weight:700;text-decoration:none;box-shadow:0 8px 24px rgba(245,155,0,0.35)">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.86 9.81 19.79 19.79 0 01.79 1.18 2 2 0 012.77 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 7.91a16 16 0 006 6l.91-.91a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+    Gọi Anh Cường
+  </a>
+  <a href="https://zalo.me/0969910136" target="_blank" style="display:flex;align-items:center;gap:8px;background:#1C1C1E;color:rgba(255,255,255,0.85);padding:0.7rem 1.2rem;border-radius:6px;font-size:0.78rem;font-weight:600;text-decoration:none;border:1px solid rgba(255,255,255,0.1)">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+    Nhắn Zalo
+  </a>
+</div>
+
+</body>
+</html>

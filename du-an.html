@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dự án – Lâm Sản Đức Cường</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Be Vietnam Pro', sans-serif; background: #F9FAFB; color: #1C1C1E; }
+
+    .nav-link-active {
+      color: #F59B00 !important;
+      border-bottom: 2px solid #F59B00;
+      padding-bottom: 2px;
+    }
+
+    /* PAGE HEADER */
+    .page-header {
+      background: #fff;
+      border-bottom: 1px solid #E5E7EB;
+      padding: 2.5rem 5rem 2rem;
+    }
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      color: #6B7280;
+      margin-bottom: 1rem;
+    }
+    .breadcrumb a { color: #6B7280; text-decoration: none; }
+    .breadcrumb a:hover { color: #F59B00; }
+    .breadcrumb-sep { color: #D1D5DB; }
+    .page-title {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #1C1C1E;
+      line-height: 1.2;
+      margin-bottom: 0.6rem;
+    }
+    .page-sub {
+      font-size: 0.88rem;
+      color: #6B7280;
+      line-height: 1.7;
+      max-width: 560px;
+    }
+
+    /* STATS BAR */
+    .stats-bar {
+      background: #F59B00;
+      padding: 1.5rem 5rem;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+    .stat-item {
+      text-align: center;
+      color: #fff;
+    }
+    .stat-number {
+      font-size: 1.6rem;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+    .stat-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      opacity: 0.85;
+      letter-spacing: 0.03em;
+    }
+
+    /* MAIN CONTENT */
+    .main-content {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 3rem 2rem 4rem;
+    }
+
+    /* FILTER TABS */
+    .filter-tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 2.5rem;
+      flex-wrap: wrap;
+    }
+    .filter-tab {
+      padding: 0.5rem 1.2rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1.5px solid #E5E7EB;
+      background: #fff;
+      color: #6B7280;
+      transition: all 0.2s;
+      font-family: 'Be Vietnam Pro', sans-serif;
+    }
+    .filter-tab.active {
+      background: #F59B00;
+      border-color: #F59B00;
+      color: #fff;
+    }
+    .filter-tab:hover:not(.active) {
+      border-color: #F59B00;
+      color: #F59B00;
+    }
+
+    /* MASONRY GRID */
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-auto-rows: 220px;
+      gap: 1.2rem;
+    }
+
+    /* Card span classes */
+    .span-2-wide { grid-column: span 2; }
+    .span-2-tall { grid-row: span 2; }
+    .span-2-both { grid-column: span 2; grid-row: span 2; }
+
+    /* PROJECT CARD */
+    .project-card {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #D4C5A9;
+      cursor: pointer;
+    }
+    .project-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+    .project-card:hover img { transform: scale(1.07); }
+    .card-placeholder {
+      width: 100%;
+      height: 100%;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+    }
+    .card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.18) 50%, transparent 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 1.2rem 1.3rem;
+      opacity: 0.92;
+      transition: opacity 0.3s;
+    }
+    .project-card:hover .card-overlay { opacity: 1; }
+    .cat-badge {
+      display: inline-block;
+      padding: 3px 9px;
+      border-radius: 20px;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      background: #F59B00;
+      color: #fff;
+      margin-bottom: 0.5rem;
+      align-self: flex-start;
+    }
+    .project-name {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.3;
+      margin-bottom: 0.25rem;
+    }
+    .project-meta {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.65);
+    }
+
+    /* CTA SECTION */
+    .cta-section {
+      background: #F59B00;
+      border-radius: 16px;
+      padding: 3.5rem 4rem;
+      margin-top: 3.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+    .cta-left {}
+    .cta-eyebrow {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 0.7rem;
+    }
+    .cta-title {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.25;
+      margin-bottom: 0.6rem;
+    }
+    .cta-sub {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.6;
+      max-width: 460px;
+    }
+    .cta-actions {
+      display: flex;
+      gap: 1rem;
+      flex-shrink: 0;
+      flex-wrap: wrap;
+    }
+    .cta-btn-white {
+      background: #fff;
+      color: #F59B00;
+      padding: 0.85rem 1.8rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .cta-btn-white:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
+    .cta-btn-outline {
+      background: transparent;
+      color: #fff;
+      padding: 0.85rem 1.8rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-decoration: none;
+      border: 2px solid rgba(255,255,255,0.6);
+      white-space: nowrap;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .cta-btn-outline:hover { border-color: #fff; background: rgba(255,255,255,0.1); }
+
+    /* FLOATING BUTTONS */
+    .float-btns {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      z-index: 500;
+    }
+    .float-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0.7rem 1.2rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+      transition: transform 0.2s, box-shadow 0.2s;
+      font-family: 'Be Vietnam Pro', sans-serif;
+    }
+    .float-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.22); }
+    .float-btn-orange { background: #F59B00; color: #fff; }
+    .float-btn-dark { background: #1C1C1E; color: #fff; }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .project-grid { grid-template-columns: repeat(3, 1fr); }
+      .span-2-both { grid-column: span 2; }
+    }
+    @media (max-width: 768px) {
+      .page-header { padding: 2rem 1.2rem 1.5rem; }
+      .page-title { font-size: 1.4rem; }
+      .stats-bar { padding: 1.2rem; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+      .main-content { padding: 2rem 1rem 3rem; }
+      .project-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: 180px;
+      }
+      .span-2-wide, .span-2-both { grid-column: span 2; }
+      .span-2-tall { grid-row: span 1; }
+      .cta-section { flex-direction: column; padding: 2rem 1.5rem; text-align: center; }
+      .cta-sub { max-width: 100%; }
+      .cta-actions { justify-content: center; }
+      nav { padding: 0 1.2rem !important; }
+      nav ul { display: none !important; }
+      footer { padding: 2.5rem 1.2rem 1.5rem !important; }
+      footer > div:first-child { grid-template-columns: 1fr !important; }
+    }
+    @media (max-width: 480px) {
+      .project-grid { grid-template-columns: 1fr; grid-auto-rows: 220px; }
+      .span-2-wide, .span-2-both, .span-2-tall { grid-column: span 1; grid-row: span 1; }
+      .stat-number { font-size: 1.3rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav style="position:sticky;top:0;z-index:200;background:#fff;border-bottom:1px solid #E5E7EB;padding:0 5rem;height:68px;display:flex;align-items:center;justify-content:space-between;gap:2rem">
+  <a href="duc-cuong-wood.html" style="display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0">
+    <img src="logo.png" style="height:46px;width:auto;object-fit:contain" alt="Logo" onerror="this.style.display='none'">
+    <div style="line-height:1.2">
+      <div style="font-weight:800;font-size:0.95rem;color:#1C1C1E;letter-spacing:0.02em">LÂM SẢN ĐỨC CƯỜNG</div>
+      <div style="font-size:0.58rem;color:#F59B00;letter-spacing:0.18em;text-transform:uppercase">WOOD EXCELLENCE</div>
+    </div>
+  </a>
+  <ul style="display:flex;gap:1.8rem;list-style:none;margin:0;padding:0">
+    <li><a href="duc-cuong-wood.html" style="font-size:0.82rem;font-weight:500;color:#6B7280;text-decoration:none">Trang chủ</a></li>
+    <li><a href="san-pham.html" style="font-size:0.82rem;font-weight:500;color:#6B7280;text-decoration:none">Sản phẩm</a></li>
+    <li><a href="dich-vu.html" style="font-size:0.82rem;font-weight:500;color:#6B7280;text-decoration:none">Dịch vụ</a></li>
+    <li><a href="du-an.html" class="nav-link-active" style="font-size:0.82rem;font-weight:600;text-decoration:none">Dự án</a></li>
+    <li><a href="tin-tuc.html" style="font-size:0.82rem;font-weight:500;color:#6B7280;text-decoration:none">Tin tức</a></li>
+    <li><a href="lien-he.html" style="font-size:0.82rem;font-weight:500;color:#6B7280;text-decoration:none">Liên hệ</a></li>
+  </ul>
+  <div style="display:flex;align-items:center;gap:1rem;flex-shrink:0">
+    <div style="position:relative">
+      <input type="text" placeholder="Tìm sản phẩm..." style="border:1px solid #E5E7EB;border-radius:6px;padding:0.5rem 0.8rem 0.5rem 2.2rem;font-size:0.8rem;color:#1C1C1E;outline:none;width:180px;font-family:inherit">
+      <svg style="position:absolute;left:8px;top:50%;transform:translateY(-50%);opacity:0.4" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1C1C1E" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    </div>
+    <a href="lien-he.html" style="background:#F59B00;color:#fff;padding:0.55rem 1.4rem;border-radius:6px;font-size:0.8rem;font-weight:700;text-decoration:none;white-space:nowrap">Nhận báo giá</a>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="breadcrumb">
+    <a href="duc-cuong-wood.html">Trang chủ</a>
+    <span class="breadcrumb-sep">›</span>
+    <span style="color:#F59B00;font-weight:600">Dự án</span>
+  </div>
+  <h1 class="page-title">Công trình thực tế</h1>
+  <p class="page-sub">Những công trình nội thất gỗ và nhà gỗ truyền thống đã được thi công bởi đội ngũ thợ lành nghề của Đức Cường — từ Bắc vào Nam, chất lượng nhất quán.</p>
+</div>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <div class="stat-number">1,000+</div>
+    <div class="stat-label">Công trình hoàn thiện</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">20+</div>
+    <div class="stat-label">Năm kinh nghiệm</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">100%</div>
+    <div class="stat-label">Gỗ tự nhiên</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">63</div>
+    <div class="stat-label">Tỉnh thành phủ sóng</div>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main-content">
+
+  <!-- Filter tabs -->
+  <div class="filter-tabs">
+    <button class="filter-tab active" data-cat="all">Tất cả</button>
+    <button class="filter-tab" data-cat="nha-go">Nhà gỗ</button>
+    <button class="filter-tab" data-cat="noi-that">Nội thất</button>
+    <button class="filter-tab" data-cat="do-tho">Đồ thờ</button>
+    <button class="filter-tab" data-cat="cua-go">Cửa gỗ</button>
+  </div>
+
+  <!-- Masonry Grid -->
+  <div class="project-grid">
+
+    <!-- Card 1: tall left anchor -->
+    <div class="project-card span-2-tall" data-cat="nha-go" onclick="location.href='du-an-1.html'" style="cursor:pointer">
+      <img src="img6.jpg" alt="Nhà gỗ 5 gian"
+        onerror="this.style.display='none';this.parentElement.querySelector('.card-placeholder').style.display='flex'">
+      <div class="card-placeholder" style="background:#C8B89C;">🏠</div>
+      <div class="card-overlay">
+        <span class="cat-badge">Nhà gỗ</span>
+        <div class="project-name">Nhà gỗ 5 gian</div>
+        <div class="project-meta">📍 Thanh Hóa · 2024</div>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="project-card" data-cat="cua-go" onclick="location.href='du-an-1.html'" style="cursor:pointer">
+      <img src="img8.jpg" alt="Cửa baroque 4 cánh"
+        onerror="this.style.display='none';this.parentElement.querySelector('.card-placeholder').style.display='flex'">
+      <div class="card-placeholder" style="background:#D6C4A6;">🚪</div>
+      <div class="card-overlay">
+        <span class="cat-badge">Cửa gỗ</span>
+        <div class="project-name">Cửa baroque 4 cánh</div>
+        <div class="project-meta">📍 Ninh Bình · 2024</div>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="project-card" data-cat="do-tho" onclick="location.href='du-an-1.html'" style="cursor:pointer">
+      <img src="img5.jpg" alt="Bộ ban thờ gỗ Cẩm"
+        onerror="this.style.display='none';this.parentElement.querySelector('.card-placeholder').style.display='flex'">
+      <div class="card-placeholder" style="background:#EDE0CC;">🏛️</div>
+      <div class="card-overlay">
+        <span class="cat-badge">Đồ thờ</span>
+        <div class="project-name">Bộ ban thờ gỗ Cẩm</div>
+        <div class="project-meta">📍 Hà Nội · 2023</div>
+      </div>
+    </div>
+
+    <!-- Card 4: wide -->
+    <div class="project-card span-2-wide" data-cat="nha-go" onclick="location.href='du-an-1.html'" style="cursor:pointer">
+      <img src="img10.jpg" alt="Nhà gỗ ngoài trời"
+        onerror="this.style.display='none';this.parentElement.querySelector('.card-placeholder').style.display='flex'">
+      <div class="card-placeholder" style="background:#C8B89C;">🌿</div>
+      <div class="card-overlay">
+        <span class="cat-badge">Nhà gỗ</span>
+        <div class="project-name">Nhà gỗ ngoài trời</div>
+        <div class="project-meta">📍 Nghệ An · 2024</div>
+      </div>
+    </div>
+
+    <!-- Card 5 -->
+    <div class="project-card" data-cat="noi-that" onclick="location.href='du-an-1.html'" style="cursor:pointer">
+      <img src="img2.jpg" alt="Sập gỗ chân quỳ"
+        onerror="this.style.display='none';this.parentElement.querySelector('.card-placeholder').style.display='flex'">
+      <div class="card-placeholder" style="background:#D4C5A9;">🪑</div>
+      <div class="card-overlay">
+        <span class="cat-badge">Nội thất</span>
+        <div class="project-name">Sập gỗ chân quỳ</div>
+        <div class="project-meta">📍 Thanh Hóa · 2023</div>
+      </div>
+    </div>
+
+    <!-- Card 6 -->
+    <div class="project-card" data-cat="cua-go" onclick="location.href='du-an-1.html'" style="cursor:pointer">
+      <img src="img7.jpg" alt="Cửa kính kết hợp gỗ"
+        onerror="this.style.display='none';this.parentElement.querySelector('.card-placeholder').style.display='flex'">
+      <div class="card-placeholder" style="background:#E8D4B8;">🚪</div>
+      <div class="card-overlay">
+        <span class="cat-badge">Cửa gỗ</span>
+        <div class="project-name">Cửa kính kết hợp gỗ</div>
+        <div class="project-meta">📍 Hải Phòng · 2024</div>
+      </div>
+    </div>
+
+    <!-- Card 7: wide -->
+    <div class="project-card span-2-wide" data-cat="nha-go" onclick="location.href='du-an-1.html'" style="cursor:pointer">
+      <img src="img11.jpg" alt="Trần gỗ kèo cổ truyền"
+        onerror="this.style.display='none';this.parentElement.querySelector('.card-placeholder').style.display='flex'">
+      <div class="card-placeholder" style="background:#BFAC90;">🏚️</div>
+      <div class="card-overlay">
+        <span class="cat-badge">Nhà gỗ</span>
+        <div class="project-name">Trần gỗ kèo cổ truyền</div>
+        <div class="project-meta">📍 Hà Tĩnh · 2023</div>
+      </div>
+    </div>
+
+    <!-- Card 8 -->
+    <div class="project-card span-2-wide" data-cat="noi-that" onclick="location.href='du-an-1.html'" style="cursor:pointer">
+      <img src="img12.jpg" alt="Giường gỗ nguyên tấm"
+        onerror="this.style.display='none';this.parentElement.querySelector('.card-placeholder').style.display='flex'">
+      <div class="card-placeholder" style="background:#D0C0A2;">🛏️</div>
+      <div class="card-overlay">
+        <span class="cat-badge">Nội thất</span>
+        <div class="project-name">Giường gỗ nguyên tấm</div>
+        <div class="project-meta">📍 TP.HCM · 2024</div>
+      </div>
+    </div>
+
+    <!-- Card 9 -->
+    <div class="project-card" data-cat="nha-go" onclick="location.href='du-an-1.html'" style="cursor:pointer">
+      <img src="img16.jpg" alt="Nhà gỗ 3 gian đình làng"
+        onerror="this.style.display='none';this.parentElement.querySelector('.card-placeholder').style.display='flex'">
+      <div class="card-placeholder" style="background:#C8B89C;">🏠</div>
+      <div class="card-overlay">
+        <span class="cat-badge">Nhà gỗ</span>
+        <div class="project-name">Nhà gỗ 3 gian đình làng</div>
+        <div class="project-meta">📍 Hà Tĩnh · 2023</div>
+      </div>
+    </div>
+
+    <!-- Card 10 -->
+    <div class="project-card" data-cat="noi-that" onclick="location.href='du-an-1.html'" style="cursor:pointer">
+      <img src="img4.jpg" alt="Kho gỗ Lim 500m³ cho resort"
+        onerror="this.style.display='none';this.parentElement.querySelector('.card-placeholder').style.display='flex'">
+      <div class="card-placeholder" style="background:#D4C5A9;">🪵</div>
+      <div class="card-overlay">
+        <span class="cat-badge">Gỗ khối</span>
+        <div class="project-name">Kho gỗ Lim 500m³ cho resort</div>
+        <div class="project-meta">📍 Sầm Sơn · 2024</div>
+      </div>
+    </div>
+
+    <!-- Card 11 -->
+    <div class="project-card" data-cat="noi-that" onclick="location.href='du-an-1.html'" style="cursor:pointer">
+      <img src="img9.jpg" alt="Phòng ngủ master gỗ Hương"
+        onerror="this.style.display='none';this.parentElement.querySelector('.card-placeholder').style.display='flex'">
+      <div class="card-placeholder" style="background:#E8D4B8;">🛏️</div>
+      <div class="card-overlay">
+        <span class="cat-badge">Nội thất</span>
+        <div class="project-name">Phòng ngủ master gỗ Hương</div>
+        <div class="project-meta">📍 TP.HCM · 2024</div>
+      </div>
+    </div>
+
+    <!-- Card 12 -->
+    <div class="project-card" data-cat="noi-that" onclick="location.href='du-an-1.html'" style="cursor:pointer">
+      <img src="img15.jpg" alt="Xuất lô gỗ Sến hộp 200m³"
+        onerror="this.style.display='none';this.parentElement.querySelector('.card-placeholder').style.display='flex'">
+      <div class="card-placeholder" style="background:#BFAC90;">📦</div>
+      <div class="card-overlay">
+        <span class="cat-badge">Gỗ khối</span>
+        <div class="project-name">Xuất lô gỗ Sến hộp 200m³</div>
+        <div class="project-meta">📍 Hà Nội · 2024</div>
+      </div>
+    </div>
+
+  </div><!-- /project-grid -->
+
+  <!-- CTA SECTION -->
+  <div class="cta-section">
+    <div class="cta-left">
+      <div class="cta-eyebrow">Bắt đầu ngay hôm nay</div>
+      <div class="cta-title">Bắt đầu dự án của bạn</div>
+      <p class="cta-sub">Từ một chiếc ghế gỗ Hương đến cả ngôi nhà gỗ 5 gian — đội ngũ Đức Cường luôn sẵn sàng tư vấn và triển khai tận nơi. Liên hệ để nhận báo giá miễn phí trong 24 giờ.</p>
+    </div>
+    <div class="cta-actions">
+      <a href="lien-he.html" class="cta-btn-white">Nhận báo giá miễn phí</a>
+      <a href="tel:0969910136" class="cta-btn-outline">📞 Gọi ngay</a>
+    </div>
+  </div>
+
+</div><!-- /main-content -->
+
+<!-- FOOTER -->
+<footer style="background:#1C1C1E;color:#fff;padding:4rem 5rem 2rem">
+  <div style="display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem">
+    <div>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:1rem">
+        <div style="width:32px;height:32px;background:#F59B00;display:flex;align-items:center;justify-content:center;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <div><div style="font-weight:800;font-size:1rem;color:#fff">LÂM SẢN ĐỨC CƯỜNG</div></div>
+      </div>
+      <p style="font-size:0.8rem;color:rgba(255,255,255,0.4);line-height:1.9;max-width:260px">Chuyên cung cấp gỗ khối, gỗ xẻ và đồ nội thất gỗ tự nhiên cao cấp. Hơn 20 năm uy tín tại Thanh Hóa.</p>
+      <div style="margin-top:1.2rem;display:flex;gap:0.8rem">
+        <a href="tel:0969910136" style="background:#F59B00;color:#fff;padding:0.5rem 1rem;border-radius:4px;font-size:0.75rem;font-weight:700;text-decoration:none">📞 0969.910.136</a>
+        <a href="https://zalo.me/0969910136" target="_blank" style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);padding:0.5rem 1rem;border-radius:4px;font-size:0.75rem;font-weight:600;text-decoration:none">Zalo</a>
+      </div>
+    </div>
+    <div>
+      <h5 style="font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:1.2rem;font-weight:600">Sản phẩm</h5>
+      <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:0.7rem">
+        <li><a href="san-pham.html" style="font-size:0.82rem;color:rgba(255,255,255,0.5);text-decoration:none">Gỗ Lim khối</a></li>
+        <li><a href="san-pham.html" style="font-size:0.82rem;color:rgba(255,255,255,0.5);text-decoration:none">Gỗ Sến khối</a></li>
+        <li><a href="san-pham.html" style="font-size:0.82rem;color:rgba(255,255,255,0.5);text-decoration:none">Gỗ Táu khối</a></li>
+        <li><a href="san-pham.html" style="font-size:0.82rem;color:rgba(255,255,255,0.5);text-decoration:none">Nội thất gỗ</a></li>
+        <li><a href="san-pham.html" style="font-size:0.82rem;color:rgba(255,255,255,0.5);text-decoration:none">Cửa chạm khắc</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5 style="font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:1.2rem;font-weight:600">Dịch vụ</h5>
+      <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:0.7rem">
+        <li><a href="dich-vu.html" style="font-size:0.82rem;color:rgba(255,255,255,0.5);text-decoration:none">Cưa xẻ theo yêu cầu</a></li>
+        <li><a href="dich-vu.html" style="font-size:0.82rem;color:rgba(255,255,255,0.5);text-decoration:none">Chạm khắc thủ công</a></li>
+        <li><a href="dich-vu.html" style="font-size:0.82rem;color:rgba(255,255,255,0.5);text-decoration:none">Thi công nội thất</a></li>
+        <li><a href="dich-vu.html" style="font-size:0.82rem;color:rgba(255,255,255,0.5);text-decoration:none">Nhà gỗ truyền thống</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5 style="font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:1.2rem;font-weight:600">Liên hệ</h5>
+      <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:0.7rem">
+        <li style="font-size:0.82rem;color:rgba(255,255,255,0.5)">📞 0969.910.136</li>
+        <li style="font-size:0.82rem;color:rgba(255,255,255,0.5)">📞 0983.832.136</li>
+        <li style="font-size:0.82rem;color:rgba(255,255,255,0.5)">📍 Thôn Minh Hùng, Xã Vạn Lộc</li>
+        <li style="font-size:0.82rem;color:rgba(255,255,255,0.5)">🕐 T2-T7: 7:00–18:00</li>
+      </ul>
+    </div>
+  </div>
+  <div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem">
+    <p style="font-size:0.72rem;color:rgba(255,255,255,0.2)">© 2025 Công Ty TNHH Lâm Sản Đức Cường · MST: 2802151649 · Thôn Minh Hùng, Xã Vạn Lộc, Thanh Hóa</p>
+    <p style="font-size:0.72rem;color:#F59B00">Chất lượng là danh dự</p>
+  </div>
+</footer>
+
+<!-- FLOATING BUTTONS -->
+<div class="float-btns">
+  <a href="tel:0969910136" class="float-btn float-btn-orange">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.09 2.18 2 2 0 012.09 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l.86-.86a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+    Gọi Anh Cường
+  </a>
+  <a href="https://zalo.me/0969910136" target="_blank" class="float-btn float-btn-dark">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+    Nhắn Zalo
+  </a>
+</div>
+
+<script>
+  // Filter tabs
+  document.querySelectorAll('.filter-tab').forEach(tab => {
+    tab.addEventListener('click', function() {
+      document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+      this.classList.add('active');
+      const cat = this.dataset.cat;
+      document.querySelectorAll('.project-card').forEach(card => {
+        if (cat === 'all' || card.dataset.cat === cat) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
+
+</body>
+</html>

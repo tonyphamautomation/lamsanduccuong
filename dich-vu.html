@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dịch vụ – Lâm Sản Đức Cường</title>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Be Vietnam Pro', sans-serif; color: #1C1C1E; background: #fff; }
+    a { transition: opacity 0.2s; }
+    a:hover { opacity: 0.8; }
+
+    @media (max-width: 900px) {
+      .nav-links { display: none !important; }
+      .nav-search { display: none !important; }
+      nav { padding: 0 1.5rem !important; }
+    }
+
+    /* Page header */
+    .page-header {
+      background: linear-gradient(135deg, #1C1C1E 0%, #2d2d30 100%);
+      padding: 5rem 5rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(245,155,0,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .page-header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    .breadcrumb {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 1.2rem;
+      letter-spacing: 0.06em;
+    }
+    .page-header h1 {
+      font-size: clamp(2rem, 4.5vw, 3rem);
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+    .page-header h1 span { color: #F59B00; }
+    .page-header p {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.5);
+      max-width: 520px;
+      line-height: 1.8;
+    }
+    @media (max-width: 768px) {
+      .page-header { padding: 3rem 1.5rem; }
+    }
+
+    /* Section helpers */
+    .section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 5rem 2rem;
+    }
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #F59B00;
+      margin-bottom: 0.7rem;
+    }
+    .section-title {
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-weight: 800;
+      color: #1C1C1E;
+      margin-bottom: 0.8rem;
+      line-height: 1.25;
+    }
+    .section-sub {
+      font-size: 0.9rem;
+      color: #6B7280;
+      line-height: 1.8;
+      max-width: 580px;
+    }
+
+    /* Service cards grid */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.4rem;
+      margin-top: 3rem;
+    }
+    @media (max-width: 900px) {
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 540px) {
+      .services-grid { grid-template-columns: 1fr; }
+    }
+    .service-card {
+      background: #fff;
+      border: 1.5px solid #E5E7EB;
+      border-radius: 16px;
+      padding: 2rem 1.8rem;
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+    .service-card:hover {
+      border-color: #F59B00;
+      box-shadow: 0 12px 40px rgba(245,155,0,0.12);
+      transform: translateY(-5px);
+    }
+    .service-card-icon {
+      width: 60px;
+      height: 60px;
+      background: #FFF8EC;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      margin-bottom: 1.4rem;
+      transition: background 0.2s;
+    }
+    .service-card:hover .service-card-icon { background: #F59B00; }
+    .service-card h3 {
+      font-size: 1rem;
+      font-weight: 800;
+      color: #1C1C1E;
+      margin-bottom: 0.7rem;
+      line-height: 1.3;
+    }
+    .service-card p {
+      font-size: 0.83rem;
+      color: #6B7280;
+      line-height: 1.75;
+      flex: 1;
+      margin-bottom: 1.5rem;
+    }
+    .service-card .card-features {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .service-card .card-features li {
+      font-size: 0.78rem;
+      color: #6B7280;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .service-card .card-features li::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #F59B00;
+      flex-shrink: 0;
+    }
+    .service-card .card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #F59B00;
+      text-decoration: none;
+      border-top: 1px solid #E5E7EB;
+      padding-top: 1rem;
+      margin-top: auto;
+      transition: gap 0.2s;
+    }
+    .service-card .card-link:hover { gap: 10px; opacity: 1; }
+
+    /* Process section */
+    .process-section {
+      background: #F9FAFB;
+      padding: 5rem 0;
+    }
+    .process-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0;
+      margin-top: 3rem;
+      position: relative;
+    }
+    .process-steps::before {
+      content: '';
+      position: absolute;
+      top: 28px;
+      left: calc(10% + 14px);
+      right: calc(10% + 14px);
+      height: 2px;
+      background: linear-gradient(90deg, #F59B00, #CC7A00);
+      z-index: 0;
+    }
+    @media (max-width: 860px) {
+      .process-steps { grid-template-columns: 1fr; gap: 1.5rem; }
+      .process-steps::before { display: none; }
+    }
+    .process-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 0 0.8rem;
+      position: relative;
+      z-index: 1;
+    }
+    .step-number {
+      width: 56px;
+      height: 56px;
+      background: #F59B00;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 1.2rem;
+      box-shadow: 0 4px 16px rgba(245,155,0,0.3);
+      flex-shrink: 0;
+    }
+    .process-step h4 {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #1C1C1E;
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+    .process-step p {
+      font-size: 0.75rem;
+      color: #6B7280;
+      line-height: 1.6;
+    }
+
+    /* Pricing section */
+    .pricing-section {
+      padding: 5rem 0;
+    }
+    .pricing-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    @media (max-width: 760px) {
+      .pricing-grid { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; }
+    }
+    .pricing-card {
+      border: 1.5px solid #E5E7EB;
+      border-radius: 16px;
+      padding: 2.2rem 2rem;
+      position: relative;
+      transition: box-shadow 0.2s;
+    }
+    .pricing-card.featured {
+      border-color: #F59B00;
+      box-shadow: 0 16px 48px rgba(245,155,0,0.15);
+      transform: scale(1.03);
+    }
+    @media (max-width: 760px) {
+      .pricing-card.featured { transform: scale(1); }
+    }
+    .pricing-badge {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #F59B00;
+      color: #fff;
+      padding: 0.3rem 1rem;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .pricing-tier {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #6B7280;
+      margin-bottom: 0.5rem;
+    }
+    .pricing-card.featured .pricing-tier { color: #F59B00; }
+    .pricing-name {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: #1C1C1E;
+      margin-bottom: 0.5rem;
+    }
+    .pricing-desc {
+      font-size: 0.8rem;
+      color: #6B7280;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+    .pricing-divider {
+      height: 1px;
+      background: #E5E7EB;
+      margin-bottom: 1.5rem;
+    }
+    .pricing-features {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      margin-bottom: 2rem;
+    }
+    .pricing-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 0.82rem;
+      color: #1C1C1E;
+    }
+    .pricing-features li .check {
+      width: 18px;
+      height: 18px;
+      background: #FFF8EC;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .pricing-card.featured .pricing-features li .check { background: rgba(245,155,0,0.15); }
+    .check svg { width: 10px; height: 10px; stroke: #F59B00; }
+    .pricing-cta {
+      display: block;
+      text-align: center;
+      padding: 0.8rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: transform 0.1s, background 0.2s;
+    }
+    .pricing-cta-outline {
+      border: 1.5px solid #E5E7EB;
+      color: #1C1C1E;
+    }
+    .pricing-cta-outline:hover { border-color: #F59B00; color: #F59B00; opacity: 1; }
+    .pricing-cta-solid {
+      background: #F59B00;
+      color: #fff;
+    }
+    .pricing-cta-solid:hover { background: #CC7A00; transform: translateY(-1px); opacity: 1; }
+
+    /* CTA Bottom */
+    .cta-bottom {
+      background: #1C1C1E;
+      padding: 5rem 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-bottom::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(245,155,0,0.07) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .cta-bottom h2 {
+      font-size: clamp(1.6rem, 3.5vw, 2.5rem);
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 0.8rem;
+      position: relative;
+    }
+    .cta-bottom h2 span { color: #F59B00; }
+    .cta-bottom p {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.45);
+      max-width: 500px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.8;
+      position: relative;
+    }
+    .cta-bottom-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      position: relative;
+    }
+    .cta-btn-orange {
+      background: #F59B00;
+      color: #fff;
+      padding: 0.9rem 2.5rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .cta-btn-orange:hover { background: #CC7A00; transform: translateY(-2px); opacity: 1; }
+    .cta-btn-ghost {
+      background: transparent;
+      color: rgba(255,255,255,0.65);
+      padding: 0.9rem 2.5rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1.5px solid rgba(255,255,255,0.15);
+      transition: border-color 0.2s;
+    }
+    .cta-btn-ghost:hover { border-color: rgba(255,255,255,0.4); opacity: 1; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav style="position:sticky;top:0;z-index:200;background:#fff;border-bottom:1px solid #E5E7EB;padding:0 5rem;height:68px;display:flex;align-items:center;justify-content:space-between;gap:2rem">
+  <a href="duc-cuong-wood.html" style="display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0">
+    <img src="logo.png" style="height:46px;width:auto;object-fit:contain" alt="Logo" onerror="this.style.display='none'">
+    <div style="line-height:1.2">
+      <div style="font-weight:800;font-size:0.95rem;color:#1C1C1E;letter-spacing:0.02em">LÂM SẢN ĐỨC CƯỜNG</div>
+      <div style="font-size:0.58rem;color:#F59B00;letter-spacing:0.18em;text-transform:uppercase">WOOD EXCELLENCE</div>
+    </div>
+  </a>
+  <ul class="nav-links" style="display:flex;gap:1.8rem;list-style:none;margin:0;padding:0">
+    <li><a href="duc-cuong-wood.html" style="font-size:0.82rem;font-weight:500;color:#6B7280;text-decoration:none">Trang chủ</a></li>
+    <li><a href="san-pham.html" style="font-size:0.82rem;font-weight:500;color:#6B7280;text-decoration:none">Sản phẩm</a></li>
+    <li><a href="dich-vu.html" style="font-size:0.82rem;font-weight:700;color:#F59B00;text-decoration:none">Dịch vụ</a></li>
+    <li><a href="du-an.html" style="font-size:0.82rem;font-weight:500;color:#6B7280;text-decoration:none">Dự án</a></li>
+    <li><a href="tin-tuc.html" style="font-size:0.82rem;font-weight:500;color:#6B7280;text-decoration:none">Tin tức</a></li>
+    <li><a href="lien-he.html" style="font-size:0.82rem;font-weight:500;color:#6B7280;text-decoration:none">Liên hệ</a></li>
+  </ul>
+  <div class="nav-search" style="display:flex;align-items:center;gap:1rem;flex-shrink:0">
+    <div style="position:relative">
+      <input type="text" placeholder="Tìm sản phẩm..." style="border:1px solid #E5E7EB;border-radius:6px;padding:0.5rem 0.8rem 0.5rem 2.2rem;font-size:0.8rem;color:#1C1C1E;outline:none;width:180px;font-family:inherit">
+      <svg style="position:absolute;left:8px;top:50%;transform:translateY(-50%);opacity:0.4" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1C1C1E" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    </div>
+    <a href="lien-he.html" style="background:#F59B00;color:#fff;padding:0.55rem 1.4rem;border-radius:6px;font-size:0.8rem;font-weight:700;text-decoration:none;white-space:nowrap">Nhận báo giá</a>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="breadcrumb">Trang chủ &rsaquo; Dịch vụ</div>
+    <h1>Dịch vụ của <span>chúng tôi</span></h1>
+    <p>Từ cưa xẻ nguyên liệu đến thi công hoàn thiện — Đức Cường đồng hành cùng bạn trong từng giai đoạn của công trình gỗ.</p>
+  </div>
+</div>
+
+<!-- SERVICES GRID -->
+<section class="section">
+  <div style="text-align:center">
+    <div class="section-label">6 dịch vụ chính</div>
+    <h2 class="section-title">Đa dạng – Chuyên nghiệp – Uy tín</h2>
+    <p class="section-sub" style="margin:0 auto">Chúng tôi cung cấp đầy đủ các dịch vụ trong chuỗi giá trị gỗ, từ nguyên liệu thô đến sản phẩm hoàn thiện.</p>
+  </div>
+
+  <div class="services-grid">
+
+    <!-- Card 1 -->
+    <div class="service-card">
+      <div class="service-card-icon">🪚</div>
+      <h3>Cưa xẻ theo yêu cầu</h3>
+      <p>Xẻ gỗ tròn thành hộp, tấm, thanh đúng quy cách theo yêu cầu của khách hàng. Máy cưa băng hiện đại, công suất lớn, sai số tối thiểu.</p>
+      <ul class="card-features">
+        <li>Cưa hộp: 4×4, 6×6, 8×8, 10×10, 12×12cm</li>
+        <li>Cưa tấm: dày 2–12cm, rộng tuỳ ý</li>
+        <li>Độ ẩm kiểm soát 12–18%</li>
+        <li>Nhận gia công số lượng lớn</li>
+      </ul>
+      <a href="lien-he.html" class="card-link">
+        Xem thêm
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="service-card">
+      <div class="service-card-icon">🏠</div>
+      <h3>Thi công nhà gỗ truyền thống</h3>
+      <p>Thiết kế và thi công nhà gỗ 3–5 gian trọn gói theo phong cách truyền thống Bắc Bộ. Từ bản vẽ, gia công cột kèo đến lắp dựng hoàn thiện.</p>
+      <ul class="card-features">
+        <li>Nhà 3 gian, 5 gian, tứ trụ</li>
+        <li>Gỗ Lim, Sến, Táu nguyên khối</li>
+        <li>Chạm khắc hoa văn theo yêu cầu</li>
+        <li>Tư vấn phong thủy miễn phí</li>
+      </ul>
+      <a href="lien-he.html" class="card-link">
+        Xem thêm
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="service-card">
+      <div class="service-card-icon">🚪</div>
+      <h3>Cửa gỗ chạm khắc</h3>
+      <p>Chế tác cửa chính, cửa phòng, cửa đình chùa theo mẫu thiết kế hoặc theo yêu cầu riêng. Thợ chạm khắc lành nghề với kinh nghiệm 20+ năm.</p>
+      <ul class="card-features">
+        <li>Cửa 2 cánh, 4 cánh, cửa thùng</li>
+        <li>Hoa văn: tứ linh, mai điểu, cúc trúc</li>
+        <li>Gỗ Lim, Sến, Dổi, Gõ đỏ</li>
+        <li>Kích thước theo đặt hàng</li>
+      </ul>
+      <a href="lien-he.html" class="card-link">
+        Xem thêm
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="service-card">
+      <div class="service-card-icon">🛏</div>
+      <h3>Nội thất gỗ cao cấp</h3>
+      <p>Sản xuất đồ nội thất gỗ tự nhiên cao cấp: giường, sập gụ, tràng kỷ, bàn ghế hội đồng, tủ chè, tủ quần áo theo mẫu hoặc đặt hàng riêng.</p>
+      <ul class="card-features">
+        <li>Giường gỗ Lim, Sến nguyên khối</li>
+        <li>Sập gụ tủ chè truyền thống</li>
+        <li>Bàn ghế phòng khách cao cấp</li>
+        <li>Tủ đứng, tủ âm tường theo yêu cầu</li>
+      </ul>
+      <a href="lien-he.html" class="card-link">
+        Xem thêm
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
+    <!-- Card 5 -->
+    <div class="service-card">
+      <div class="service-card-icon">⛩</div>
+      <h3>Đồ thờ tự &amp; mỹ nghệ</h3>
+      <p>Chế tác bàn thờ, ỷ thờ, bộ tam sự, ngũ sự, đồ thờ chạm tứ linh cho gia đình, đình chùa, miếu mạo theo đúng phong tục truyền thống.</p>
+      <ul class="card-features">
+        <li>Bàn thờ gia tiên các kích cỡ</li>
+        <li>Sập thờ, ỷ thờ, kỷ thờ</li>
+        <li>Bộ tam sự, ngũ sự, thất sự đồng</li>
+        <li>Đồ thờ chùa chiền, đình làng</li>
+      </ul>
+      <a href="lien-he.html" class="card-link">
+        Xem thêm
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
+    <!-- Card 6 -->
+    <div class="service-card">
+      <div class="service-card-icon">🚚</div>
+      <h3>Giao hàng toàn quốc</h3>
+      <p>Vận chuyển gỗ và đồ mộc bằng xe chuyên dụng trên toàn quốc 63 tỉnh thành. Đóng gói cẩn thận, đảm bảo hàng nguyên vẹn khi đến tay khách hàng.</p>
+      <ul class="card-features">
+        <li>Giao hàng trong 24–72 giờ</li>
+        <li>Xe tải chuyên dụng, chuyên nghiệp</li>
+        <li>Đóng gói bảo vệ chống va đập</li>
+        <li>Theo dõi đơn hàng real-time</li>
+      </ul>
+      <a href="lien-he.html" class="card-link">
+        Xem thêm
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROCESS SECTION -->
+<section class="process-section">
+  <div class="process-inner">
+    <div style="text-align:center">
+      <div class="section-label">Quy trình làm việc</div>
+      <h2 class="section-title">5 bước đơn giản – Kết quả hoàn hảo</h2>
+      <p class="section-sub" style="margin:0 auto">Quy trình làm việc minh bạch, chuyên nghiệp giúp đảm bảo dự án của bạn được thực hiện đúng yêu cầu và tiến độ.</p>
+    </div>
+
+    <div class="process-steps">
+      <div class="process-step">
+        <div class="step-number">1</div>
+        <h4>Tiếp nhận &amp; Tư vấn</h4>
+        <p>Lắng nghe nhu cầu, tư vấn loại gỗ và phương án phù hợp nhất</p>
+      </div>
+      <div class="process-step">
+        <div class="step-number">2</div>
+        <h4>Khảo sát &amp; Thiết kế</h4>
+        <p>Đo đạc thực tế, lên bản vẽ kỹ thuật và dự toán chi phí</p>
+      </div>
+      <div class="process-step">
+        <div class="step-number">3</div>
+        <h4>Lựa chọn &amp; Xẻ gỗ</h4>
+        <p>Chọn gỗ nguyên liệu, kiểm tra chất lượng và cưa xẻ đúng quy cách</p>
+      </div>
+      <div class="process-step">
+        <div class="step-number">4</div>
+        <h4>Chế tác &amp; Hoàn thiện</h4>
+        <p>Gia công thủ công tỉ mỉ, hoàn thiện bề mặt và kiểm tra chất lượng</p>
+      </div>
+      <div class="process-step">
+        <div class="step-number">5</div>
+        <h4>Lắp đặt &amp; Bàn giao</h4>
+        <p>Vận chuyển an toàn, lắp đặt hoàn chỉnh và bàn giao có bảo hành</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING SECTION -->
+<section class="pricing-section">
+  <div class="pricing-inner">
+    <div style="text-align:center">
+      <div class="section-label">Bảng giá dịch vụ</div>
+      <h2 class="section-title">Gói dịch vụ phù hợp mọi nhu cầu</h2>
+      <p class="section-sub" style="margin:0 auto">Liên hệ để được báo giá chính xác theo nhu cầu thực tế. Giá dưới đây là tham khảo cho dịch vụ nội thất gỗ tự nhiên.</p>
+    </div>
+
+    <div class="pricing-grid">
+
+      <!-- Basic -->
+      <div class="pricing-card">
+        <div class="pricing-tier">Cơ bản</div>
+        <div class="pricing-name">Gỗ Nguyên Liệu</div>
+        <div class="pricing-desc">Phù hợp cho cá nhân mua gỗ xẻ, gỗ hộp để tự thi công hoặc bán lại.</div>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features">
+          <li>
+            <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3"><polyline points="20,6 9,17 4,12"/></svg></span>
+            Gỗ xẻ hộp, tấm các kích cỡ
+          </li>
+          <li>
+            <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3"><polyline points="20,6 9,17 4,12"/></svg></span>
+            Giấy tờ nguồn gốc đầy đủ
+          </li>
+          <li>
+            <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3"><polyline points="20,6 9,17 4,12"/></svg></span>
+            Hóa đơn VAT
+          </li>
+          <li>
+            <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3"><polyline points="20,6 9,17 4,12"/></svg></span>
+            Giao hàng toàn quốc
+          </li>
+          <li>
+            <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3"><polyline points="20,6 9,17 4,12"/></svg></span>
+            Tư vấn chọn gỗ miễn phí
+          </li>
+        </ul>
+        <a href="lien-he.html" class="pricing-cta pricing-cta-outline">Báo giá ngay</a>
+      </div>
+
+      <!-- Standard (featured) -->
+      <div class="pricing-card featured">
+        <div class="pricing-badge">Phổ biến nhất</div>
+        <div class="pricing-tier">Tiêu chuẩn</div>
+        <div class="pricing-name">Nội Thất &amp; Cửa</div>
+        <div class="pricing-desc">Phù hợp cho gia đình cần đặt hàng nội thất gỗ hoặc cửa gỗ chạm khắc theo mẫu.</div>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features">
+          <li>
+            <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3"><polyline points="20,6 9,17 4,12"/></svg></span>
+            Tất cả dịch vụ gói Cơ bản
+          </li>
+          <li>
+            <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3"><polyline points="20,6 9,17 4,12"/></svg></span>
+            Thiết kế theo yêu cầu
+          </li>
+          <li>
+            <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3"><polyline points="20,6 9,17 4,12"/></svg></span>
+            Chạm khắc thủ công
+          </li>
+          <li>
+            <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3"><polyline points="20,6 9,17 4,12"/></svg></span>
+            Lắp đặt tại nhà
+          </li>
+          <li>
+            <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3"><polyline points="20,6 9,17 4,12"/></svg></span>
+            Bảo hành 12 tháng
+          </li>
+          <li>
+            <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3"><polyline points="20,6 9,17 4,12"/></svg></span>
+            Hỗ trợ sau bán hàng
+          </li>
+        </ul>
+        <a href="lien-he.html" class="pricing-cta pricing-cta-solid">Nhận báo giá →</a>
+      </div>
+
+      <!-- Premium -->
+      <div class="pricing-card">
+        <div class="pricing-tier">Cao cấp</div>
+        <div class="pricing-name">Nhà Gỗ Trọn Gói</div>
+        <div class="pricing-desc">Giải pháp toàn diện cho nhà gỗ truyền thống 3–5 gian từ thiết kế đến bàn giao.</div>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features">
+          <li>
+            <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3"><polyline points="20,6 9,17 4,12"/></svg></span>
+            Tất cả dịch vụ gói Tiêu chuẩn
+          </li>
+          <li>
+            <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3"><polyline points="20,6 9,17 4,12"/></svg></span>
+            Khảo sát thực địa miễn phí
+          </li>
+          <li>
+            <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3"><polyline points="20,6 9,17 4,12"/></svg></span>
+            Bản vẽ kỹ thuật 3D
+          </li>
+          <li>
+            <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3"><polyline points="20,6 9,17 4,12"/></svg></span>
+            Tư vấn phong thủy
+          </li>
+          <li>
+            <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3"><polyline points="20,6 9,17 4,12"/></svg></span>
+            Bảo hành 24 tháng
+          </li>
+          <li>
+            <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3"><polyline points="20,6 9,17 4,12"/></svg></span>
+            Quản lý dự án trọn gói
+          </li>
+        </ul>
+        <a href="lien-he.html" class="pricing-cta pricing-cta-outline">Tư vấn ngay</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA BOTTOM -->
+<section class="cta-bottom">
+  <h2>Nhận báo giá <span>miễn phí</span></h2>
+  <p>Mô tả nhu cầu của bạn qua Zalo hoặc điện thoại — chúng tôi sẽ phản hồi với báo giá chi tiết trong vòng 30 phút.</p>
+  <div class="cta-bottom-actions">
+    <a href="lien-he.html" class="cta-btn-orange">Gửi yêu cầu báo giá →</a>
+    <a href="tel:0969910136" class="cta-btn-ghost">📞 0969.910.136</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:#1C1C1E;color:#fff;padding:4rem 5rem 2rem">
+  <div style="display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem">
+    <div>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:1rem">
+        <div style="width:32px;height:32px;background:#F59B00;display:flex;align-items:center;justify-content:center;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <div style="font-weight:800;font-size:1rem;color:#fff">LÂM SẢN ĐỨC CƯỜNG</div>
+      </div>
+      <p style="font-size:0.8rem;color:rgba(255,255,255,0.4);line-height:1.9;max-width:260px">Chuyên cung cấp gỗ khối, gỗ xẻ và đồ nội thất gỗ tự nhiên cao cấp. Hơn 20 năm uy tín tại Thanh Hóa.</p>
+      <div style="margin-top:1.2rem;display:flex;gap:0.8rem">
+        <a href="tel:0969910136" style="background:#F59B00;color:#fff;padding:0.5rem 1rem;border-radius:4px;font-size:0.75rem;font-weight:700;text-decoration:none">📞 0969.910.136</a>
+        <a href="https://zalo.me/0969910136" target="_blank" style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);padding:0.5rem 1rem;border-radius:4px;font-size:0.75rem;font-weight:600;text-decoration:none">Zalo</a>
+      </div>
+    </div>
+    <div>
+      <h5 style="font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:1.2rem;font-weight:600">Sản phẩm</h5>
+      <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:0.7rem">
+        <li><a href="san-pham.html" style="font-size:0.82rem;color:rgba(255,255,255,0.5);text-decoration:none">Gỗ Lim khối</a></li>
+        <li><a href="san-pham.html" style="font-size:0.82rem;color:rgba(255,255,255,0.5);text-decoration:none">Gỗ Sến khối</a></li>
+        <li><a href="san-pham.html" style="font-size:0.82rem;color:rgba(255,255,255,0.5);text-decoration:none">Nội thất gỗ</a></li>
+        <li><a href="san-pham.html" style="font-size:0.82rem;color:rgba(255,255,255,0.5);text-decoration:none">Cửa chạm khắc</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5 style="font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:1.2rem;font-weight:600">Dịch vụ</h5>
+      <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:0.7rem">
+        <li><a href="dich-vu.html" style="font-size:0.82rem;color:rgba(255,255,255,0.5);text-decoration:none">Cưa xẻ theo yêu cầu</a></li>
+        <li><a href="dich-vu.html" style="font-size:0.82rem;color:rgba(255,255,255,0.5);text-decoration:none">Chạm khắc thủ công</a></li>
+        <li><a href="dich-vu.html" style="font-size:0.82rem;color:rgba(255,255,255,0.5);text-decoration:none">Thi công nội thất</a></li>
+        <li><a href="dich-vu.html" style="font-size:0.82rem;color:rgba(255,255,255,0.5);text-decoration:none">Nhà gỗ truyền thống</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5 style="font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:1.2rem;font-weight:600">Liên hệ</h5>
+      <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:0.7rem">
+        <li style="font-size:0.82rem;color:rgba(255,255,255,0.5)">📞 0969.910.136</li>
+        <li style="font-size:0.82rem;color:rgba(255,255,255,0.5)">📞 0983.832.136</li>
+        <li style="font-size:0.82rem;color:rgba(255,255,255,0.5)">📍 Thôn Minh Hùng, Xã Vạn Lộc</li>
+        <li style="font-size:0.82rem;color:rgba(255,255,255,0.5)">🕐 T2-T7: 7:00–18:00</li>
+      </ul>
+    </div>
+  </div>
+  <div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem">
+    <p style="font-size:0.72rem;color:rgba(255,255,255,0.2)">© 2025 Công Ty TNHH Lâm Sản Đức Cường · MST: 2802151649</p>
+    <p style="font-size:0.72rem;color:#F59B00">Chất lượng là danh dự</p>
+  </div>
+</footer>
+
+<!-- FLOATING CTA -->
+<div style="position:fixed;bottom:2rem;right:2rem;z-index:300;display:flex;flex-direction:column;gap:0.6rem;align-items:flex-end">
+  <a href="tel:0969910136" style="display:flex;align-items:center;gap:8px;background:#F59B00;color:#fff;padding:0.7rem 1.2rem;border-radius:6px;font-size:0.78rem;font-weight:700;text-decoration:none;box-shadow:0 8px 24px rgba(245,155,0,0.35)">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.86 9.81 19.79 19.79 0 01.79 1.18 2 2 0 012.77 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 7.91a16 16 0 006 6l.91-.91a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+    Gọi Anh Cường
+  </a>
+  <a href="https://zalo.me/0969910136" target="_blank" style="display:flex;align-items:center;gap:8px;background:#1C1C1E;color:rgba(255,255,255,0.85);padding:0.7rem 1.2rem;border-radius:6px;font-size:0.78rem;font-weight:600;text-decoration:none;border:1px solid rgba(255,255,255,0.1)">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+    Nhắn Zalo
+  </a>
+</div>
+
+</body>
+</html>

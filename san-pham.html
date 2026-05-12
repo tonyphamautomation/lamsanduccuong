@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sản phẩm – Lâm Sản Đức Cường</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Be Vietnam Pro', sans-serif; background: #F9FAFB; color: #1C1C1E; }
+
+    /* NAV */
+    .nav-link-active {
+      color: #F59B00 !important;
+      border-bottom: 2px solid #F59B00;
+      padding-bottom: 2px;
+    }
+
+    /* LAYOUT */
+    .page-body {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2.5rem 2rem 4rem;
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 2.5rem;
+      align-items: start;
+    }
+
+    /* SIDEBAR */
+    .sidebar {
+      background: #fff;
+      border: 1px solid #E5E7EB;
+      border-radius: 12px;
+      padding: 1.5rem;
+      position: sticky;
+      top: 88px;
+    }
+    .sidebar-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #1C1C1E;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #E5E7EB;
+    }
+    .filter-section { margin-bottom: 1.5rem; }
+    .filter-label {
+      font-size: 0.63rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #6B7280;
+      margin-bottom: 0.8rem;
+      display: block;
+    }
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0.35rem 0;
+      cursor: pointer;
+    }
+    .checkbox-item input[type="checkbox"] {
+      accent-color: #F59B00;
+      width: 15px;
+      height: 15px;
+      cursor: pointer;
+    }
+    .checkbox-item span {
+      font-size: 0.82rem;
+      color: #374151;
+    }
+    .checkbox-item:hover span { color: #F59B00; }
+    .filter-divider {
+      border: none;
+      border-top: 1px solid #E5E7EB;
+      margin: 1rem 0;
+    }
+
+    /* MAIN CONTENT */
+    .main-content {}
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      color: #6B7280;
+      margin-bottom: 1.2rem;
+    }
+    .breadcrumb a { color: #6B7280; text-decoration: none; }
+    .breadcrumb a:hover { color: #F59B00; }
+    .breadcrumb-sep { color: #D1D5DB; }
+
+    .page-title {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: #1C1C1E;
+      line-height: 1.2;
+      margin-bottom: 0.6rem;
+    }
+    .page-sub {
+      font-size: 0.85rem;
+      color: #6B7280;
+      line-height: 1.7;
+      margin-bottom: 1.8rem;
+      max-width: 600px;
+    }
+
+    /* RESULT COUNT */
+    .result-count {
+      font-size: 0.8rem;
+      color: #6B7280;
+      margin-bottom: 1rem;
+    }
+    .result-count strong { color: #F59B00; }
+
+    /* TABS */
+    .tabs {
+      display: flex;
+      gap: 0;
+      border-bottom: 2px solid #E5E7EB;
+      margin-bottom: 2rem;
+    }
+    .tab {
+      padding: 0.65rem 1.2rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #6B7280;
+      cursor: pointer;
+      border: none;
+      background: none;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+      transition: color 0.2s;
+      font-family: 'Be Vietnam Pro', sans-serif;
+    }
+    .tab.active {
+      color: #F59B00;
+      border-bottom-color: #F59B00;
+    }
+    .tab:hover:not(.active) { color: #1C1C1E; }
+
+    /* PRODUCT GRID */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    /* PRODUCT CARD */
+    .product-card {
+      background: #fff;
+      border: 1px solid #E5E7EB;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: box-shadow 0.25s, transform 0.25s;
+    }
+    .product-card.hidden {
+      display: none;
+    }
+    .product-card:hover {
+      box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+      transform: translateY(-3px);
+    }
+    .card-img {
+      position: relative;
+      height: 210px;
+      background: #F3F4F6;
+      overflow: hidden;
+    }
+    .card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s;
+    }
+    .product-card:hover .card-img img { transform: scale(1.06); }
+    .card-img-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+    }
+    .badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      padding: 3px 9px;
+      border-radius: 20px;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+    }
+    .badge-green { background: #D1FAE5; color: #065F46; }
+    .badge-amber { background: #FEF3C7; color: #92400E; }
+    .eye-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 32px;
+      height: 32px;
+      background: rgba(255,255,255,0.92);
+      border: none;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .product-card:hover .eye-btn { opacity: 1; }
+    .eye-btn:hover { background: #F59B00; }
+    .eye-btn:hover svg { stroke: white; }
+
+    .card-body { padding: 1rem 1.1rem 1.2rem; }
+    .wood-type {
+      font-size: 0.62rem;
+      font-weight: 700;
+      color: #F59B00;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.35rem;
+    }
+    .card-name {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #1C1C1E;
+      line-height: 1.35;
+      margin-bottom: 0.4rem;
+    }
+    .card-spec {
+      font-size: 0.75rem;
+      color: #6B7280;
+    }
+
+    /* NO RESULTS */
+    .no-results {
+      display: none;
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 3rem 1rem;
+      color: #6B7280;
+      font-size: 0.9rem;
+    }
+
+    /* FLOATING BUTTONS */
+    .float-btns {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      z-index: 500;
+    }
+    .float-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0.7rem 1.2rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+      transition: transform 0.2s, box-shadow 0.2s;
+      font-family: 'Be Vietnam Pro', sans-serif;
+    }
+    .float-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.22); }
+    .float-btn-orange { background: #F59B00; color: #fff; }
+    .float-btn-dark { background: #1C1C1E; color: #fff; }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .page-body {
+        grid-template-columns: 1fr;
+        padding: 1.5rem 1rem 3rem;
+      }
+      .sidebar {
+        position: static;
+        display: none;
+      }
+      .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+      }
+      .page-title { font-size: 1.3rem; }
+      .tabs { overflow-x: auto; }
+      nav { padding: 0 1.2rem !important; }
+      nav ul { display: none !important; }
+      footer { padding: 2.5rem 1.2rem 1.5rem !important; }
+      footer > div:first-child { grid-template-columns: 1fr !important; }
+    }
+    @media (max-width: 480px) {
+      .product-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav style="position:sticky;top:0;z-index:200;background:#fff;border-bottom:1px solid #E5E7EB;padding:0 5rem;height:68px;display:flex;align-items:center;justify-content:space-between;gap:2rem">
+  <a href="duc-cuong-wood.html" style="display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0">
+    <img src="logo.png" style="height:46px;width:auto;object-fit:contain" alt="Logo" onerror="this.style.display='none'">
+    <div style="line-height:1.2">
+      <div style="font-weight:800;font-size:0.95rem;color:#1C1C1E;letter-spacing:0.02em">LÂM SẢN ĐỨC CƯỜNG</div>
+      <div style="font-size:0.58rem;color:#F59B00;letter-spacing:0.18em;text-transform:uppercase">WOOD EXCELLENCE</div>
+    </div>
+  </a>
+  <ul style="display:flex;gap:1.8rem;list-style:none;margin:0;padding:0">
+    <li><a href="duc-cuong-wood.html" style="font-size:0.82rem;font-weight:500;color:#6B7280;text-decoration:none">Trang chủ</a></li>
+    <li><a href="san-pham.html" class="nav-link-active" style="font-size:0.82rem;font-weight:600;text-decoration:none">Sản phẩm</a></li>
+    <li><a href="dich-vu.html" style="font-size:0.82rem;font-weight:500;color:#6B7280;text-decoration:none">Dịch vụ</a></li>
+    <li><a href="du-an.html" style="font-size:0.82rem;font-weight:500;color:#6B7280;text-decoration:none">Dự án</a></li>
+    <li><a href="tin-tuc.html" style="font-size:0.82rem;font-weight:500;color:#6B7280;text-decoration:none">Tin tức</a></li>
+    <li><a href="lien-he.html" style="font-size:0.82rem;font-weight:500;color:#6B7280;text-decoration:none">Liên hệ</a></li>
+  </ul>
+  <div style="display:flex;align-items:center;gap:1rem;flex-shrink:0">
+    <div style="position:relative">
+      <input type="text" placeholder="Tìm sản phẩm..." style="border:1px solid #E5E7EB;border-radius:6px;padding:0.5rem 0.8rem 0.5rem 2.2rem;font-size:0.8rem;color:#1C1C1E;outline:none;width:180px;font-family:inherit">
+      <svg style="position:absolute;left:8px;top:50%;transform:translateY(-50%);opacity:0.4" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1C1C1E" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    </div>
+    <a href="lien-he.html" style="background:#F59B00;color:#fff;padding:0.55rem 1.4rem;border-radius:6px;font-size:0.8rem;font-weight:700;text-decoration:none;white-space:nowrap">Nhận báo giá</a>
+  </div>
+</nav>
+
+<!-- PAGE BODY -->
+<div class="page-body">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-title">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F59B00" stroke-width="2.5"><line x1="4" y1="6" x2="11" y2="6"/><line x1="13" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="9" y2="12"/><line x1="11" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="15" y2="18"/><line x1="17" y1="18" x2="20" y2="18"/><circle cx="12" cy="6" r="1.5" fill="#F59B00" stroke="none"/><circle cx="10" cy="12" r="1.5" fill="#F59B00" stroke="none"/><circle cx="16" cy="18" r="1.5" fill="#F59B00" stroke="none"/></svg>
+      Bộ lọc thông minh
+    </div>
+
+    <div class="filter-section">
+      <span class="filter-label">Phân loại</span>
+      <label class="checkbox-item"><input type="checkbox" data-filter="category" value="ban-ghe"> <span>Bàn ghế</span></label>
+      <label class="checkbox-item"><input type="checkbox" data-filter="category" value="giuong-tu"> <span>Giường tủ</span></label>
+      <label class="checkbox-item"><input type="checkbox" data-filter="category" value="do-tho"> <span>Đồ thờ</span></label>
+      <label class="checkbox-item"><input type="checkbox" data-filter="category" value="sap"> <span>Sập chân quỳ</span></label>
+      <label class="checkbox-item"><input type="checkbox" data-filter="category" value="go-nguyen-lieu"> <span>Gỗ nguyên liệu</span></label>
+      <label class="checkbox-item"><input type="checkbox" data-filter="category" value="cua-go"> <span>Cửa gỗ</span></label>
+    </div>
+
+    <hr class="filter-divider">
+
+    <div class="filter-section">
+      <span class="filter-label">Loại gỗ</span>
+      <label class="checkbox-item"><input type="checkbox" data-filter="wood" value="lim"> <span>Gỗ Lim</span></label>
+      <label class="checkbox-item"><input type="checkbox" data-filter="wood" value="sen"> <span>Gỗ Sến</span></label>
+      <label class="checkbox-item"><input type="checkbox" data-filter="wood" value="tau"> <span>Gỗ Táu</span></label>
+      <label class="checkbox-item"><input type="checkbox" data-filter="wood" value="cam"> <span>Gỗ Cẩm</span></label>
+      <label class="checkbox-item"><input type="checkbox" data-filter="wood" value="huong"> <span>Gỗ Hương</span></label>
+      <label class="checkbox-item"><input type="checkbox" data-filter="wood" value="got-do"> <span>Gỗ Gõ Đỏ</span></label>
+      <label class="checkbox-item"><input type="checkbox" data-filter="wood" value="mun"> <span>Gỗ Mun</span></label>
+      <label class="checkbox-item"><input type="checkbox" data-filter="wood" value="mit"> <span>Gỗ Mít</span></label>
+    </div>
+
+    <hr class="filter-divider">
+
+    <div class="filter-section">
+      <span class="filter-label">Trạng thái</span>
+      <label class="checkbox-item"><input type="checkbox" data-filter="status" value="san-co"> <span>Sẵn có</span></label>
+      <label class="checkbox-item"><input type="checkbox" data-filter="status" value="dat-lam"> <span>Đặt làm</span></label>
+    </div>
+
+    <button id="btn-apply-filter" style="width:100%;background:#F59B00;color:#fff;border:none;border-radius:8px;padding:0.7rem;font-size:0.82rem;font-weight:700;cursor:pointer;font-family:inherit;margin-top:0.5rem;">Áp dụng bộ lọc</button>
+    <button id="btn-clear-filter" style="width:100%;background:none;color:#6B7280;border:1px solid #E5E7EB;border-radius:8px;padding:0.6rem;font-size:0.78rem;font-weight:600;cursor:pointer;font-family:inherit;margin-top:0.5rem;">Xóa bộ lọc</button>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main-content">
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+      <a href="duc-cuong-wood.html">Trang chủ</a>
+      <span class="breadcrumb-sep">›</span>
+      <span style="color:#F59B00;font-weight:600">Sản phẩm</span>
+    </div>
+
+    <h1 class="page-title">Danh mục Sản phẩm &amp; Dịch vụ</h1>
+    <p class="page-sub">Khám phá bộ sưu tập nội thất gỗ tự nhiên cao cấp và các dịch vụ gia công xẻ gỗ chuyên nghiệp tại xưởng Đức Cường.</p>
+
+    <!-- Tabs -->
+    <div class="tabs">
+      <button class="tab active" data-tab-category="all">Tất cả sản phẩm</button>
+      <button class="tab" data-tab-category="noi-that">Sản phẩm nội thất</button>
+      <button class="tab" data-tab-category="go-nguyen-lieu">Gỗ nguyên tấm</button>
+      <button class="tab" data-tab-category="phu-kien">Phụ kiện mỹ nghệ</button>
+    </div>
+
+    <!-- Result count -->
+    <div class="result-count" id="result-count">Đang hiển thị <strong id="count-num">18</strong> sản phẩm</div>
+
+    <!-- Product Grid -->
+    <div class="product-grid" id="product-grid">
+
+      <!-- Card 1 -->
+      <div class="product-card" data-category="ban-ghe" data-wood="huong">
+        <div class="card-img" style="background:#F5E6C8;">
+          <img src="img9.jpg" alt="Bộ bàn ghế Hoàng Gia Louis"
+            onerror="this.style.display='none';this.parentElement.querySelector('.card-img-placeholder').style.display='flex'">
+          <div class="card-img-placeholder" style="display:none;">🪑</div>
+          <span class="badge badge-green">SẴN CÓ</span>
+          <button class="eye-btn" title="Xem nhanh">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1C1C1E" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+        <div class="card-body">
+          <div class="wood-type">GỖ HƯƠNG ĐÁ</div>
+          <div class="card-name">Bộ bàn ghế Hoàng Gia Louis</div>
+          <div class="card-spec">Kích thước: 10 món</div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="product-card" data-category="giuong-tu" data-wood="got-do">
+        <div class="card-img" style="background:#E8D5C0;">
+          <img src="img3.jpg" alt="Giường Ngủ Chữ X Chạm Khắc"
+            onerror="this.style.display='none';this.parentElement.querySelector('.card-img-placeholder').style.display='flex'">
+          <div class="card-img-placeholder" style="display:none;">🛏️</div>
+          <span class="badge badge-amber">ĐẶT LÀM</span>
+          <button class="eye-btn" title="Xem nhanh">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1C1C1E" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+        <div class="card-body">
+          <div class="wood-type">GỖ GÕ ĐỎ</div>
+          <div class="card-name">Giường Ngủ Chữ X Chạm Khắc</div>
+          <div class="card-spec">Kích thước: 1m8 x 2m</div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="product-card" data-category="sap" data-wood="lim">
+        <div class="card-img" style="background:#D4C5A9;">
+          <img src="img13.jpg" alt="Chiếu Ngựa Nguyên Khối"
+            onerror="this.style.display='none';this.parentElement.querySelector('.card-img-placeholder').style.display='flex'">
+          <div class="card-img-placeholder" style="display:none;">🪵</div>
+          <span class="badge badge-green">SẴN CÓ</span>
+          <button class="eye-btn" title="Xem nhanh">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1C1C1E" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+        <div class="card-body">
+          <div class="wood-type">GỖ LIM NAM PHI</div>
+          <div class="card-name">Chiếu Ngựa Nguyên Khối</div>
+          <div class="card-spec">Độ dày: 20cm</div>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="product-card" data-category="do-tho" data-wood="mit">
+        <div class="card-img" style="background:#EDE0CC;">
+          <img src="img5.jpg" alt="Án Gian Thờ Nhị Cấp Hồ Phú"
+            onerror="this.style.display='none';this.parentElement.querySelector('.card-img-placeholder').style.display='flex'">
+          <div class="card-img-placeholder" style="display:none;">🏛️</div>
+          <span class="badge badge-amber">ĐẶT LÀM</span>
+          <button class="eye-btn" title="Xem nhanh">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1C1C1E" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+        <div class="card-body">
+          <div class="wood-type">GỖ MÍT / GỖ CU</div>
+          <div class="card-name">Án Gian Thờ Nhị Cấp Hồ Phú</div>
+          <div class="card-spec">Hàng đúc tay 100%</div>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="product-card" data-category="giuong-tu" data-wood="mun">
+        <div class="card-img" style="background:#C8B99A;">
+          <img src="img2.jpg" alt="Tủ Rượu Tân Cổ Điển Cao Cấp"
+            onerror="this.style.display='none';this.parentElement.querySelector('.card-img-placeholder').style.display='flex'">
+          <div class="card-img-placeholder" style="display:none;">🗄️</div>
+          <span class="badge badge-green">SẴN CÓ</span>
+          <button class="eye-btn" title="Xem nhanh">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1C1C1E" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+        <div class="card-body">
+          <div class="wood-type">GỖ MUN LÀO</div>
+          <div class="card-name">Tủ Rượu Tân Cổ Điển Cao Cấp</div>
+          <div class="card-spec">Sơn Inchem Mỹ</div>
+        </div>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="product-card" data-category="sap" data-wood="huong">
+        <div class="card-img" style="background:#F0E2CC;">
+          <img src="img8.jpg" alt="Sập Thờ Mai Điếu Chân 24"
+            onerror="this.style.display='none';this.parentElement.querySelector('.card-img-placeholder').style.display='flex'">
+          <div class="card-img-placeholder" style="display:none;">🪑</div>
+          <span class="badge badge-green">SẴN CÓ</span>
+          <button class="eye-btn" title="Xem nhanh">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1C1C1E" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+        <div class="card-body">
+          <div class="wood-type">GỖ HƯƠNG ĐÁ</div>
+          <div class="card-name">Sập Thờ Mai Điếu Chân 24</div>
+          <div class="card-spec">Hàng mộc tại xưởng</div>
+        </div>
+      </div>
+
+      <!-- Card 7 -->
+      <div class="product-card" data-category="cua-go" data-wood="lim">
+        <div class="card-img" style="background:#D6C4A6;">
+          <img src="img1.jpg" alt="Cửa Chính 4 Cánh Baroque"
+            onerror="this.style.display='none';this.parentElement.querySelector('.card-img-placeholder').style.display='flex'">
+          <div class="card-img-placeholder" style="display:none;">🚪</div>
+          <span class="badge badge-green">SẴN CÓ</span>
+          <button class="eye-btn" title="Xem nhanh">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1C1C1E" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+        <div class="card-body">
+          <div class="wood-type">GỖ LIM</div>
+          <div class="card-name">Cửa Chính 4 Cánh Baroque</div>
+          <div class="card-spec">Tay nắm đồng mạ vàng</div>
+        </div>
+      </div>
+
+      <!-- Card 8 -->
+      <div class="product-card" data-category="ban-ghe" data-wood="got-do">
+        <div class="card-img" style="background:#E8D4B8;">
+          <img src="img7.jpg" alt="Bộ Trường Kỷ 5 Món"
+            onerror="this.style.display='none';this.parentElement.querySelector('.card-img-placeholder').style.display='flex'">
+          <div class="card-img-placeholder" style="display:none;">🪑</div>
+          <span class="badge badge-amber">ĐẶT LÀM</span>
+          <button class="eye-btn" title="Xem nhanh">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1C1C1E" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+        <div class="card-body">
+          <div class="wood-type">GỖ GÕ ĐỎ</div>
+          <div class="card-name">Bộ Trường Kỷ 5 Món</div>
+          <div class="card-spec">Chạm khắc tứ linh</div>
+        </div>
+      </div>
+
+      <!-- Card 9 -->
+      <div class="product-card" data-category="giuong-tu" data-wood="sen">
+        <div class="card-img" style="background:#CCB99A;">
+          <img src="img6.jpg" alt="Giường Thái 1m8 x 2m"
+            onerror="this.style.display='none';this.parentElement.querySelector('.card-img-placeholder').style.display='flex'">
+          <div class="card-img-placeholder" style="display:none;">🛏️</div>
+          <span class="badge badge-green">SẴN CÓ</span>
+          <button class="eye-btn" title="Xem nhanh">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1C1C1E" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+        <div class="card-body">
+          <div class="wood-type">GỖ SẾN</div>
+          <div class="card-name">Giường Thái 1m8 x 2m</div>
+          <div class="card-spec">Nguyên khối, mộc thô</div>
+        </div>
+      </div>
+
+      <!-- Card 10 -->
+      <div class="product-card" data-category="go-nguyen-lieu" data-wood="lim">
+        <div class="card-img" style="background:#D8C8AA;">
+          <img src="img14.jpg" alt="Gỗ Lim Tròn Nhập Cảng"
+            onerror="this.style.display='none';this.parentElement.querySelector('.card-img-placeholder').style.display='flex'">
+          <div class="card-img-placeholder" style="display:none;">🪵</div>
+          <span class="badge badge-green">SẴN CÓ</span>
+          <button class="eye-btn" title="Xem nhanh">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1C1C1E" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+        <div class="card-body">
+          <div class="wood-type">GỖ LIM</div>
+          <div class="card-name">Gỗ Lim Tròn Nhập Cảng</div>
+          <div class="card-spec">Đường kính 40–80cm</div>
+        </div>
+      </div>
+
+      <!-- Card 11 -->
+      <div class="product-card" data-category="go-nguyen-lieu" data-wood="sen">
+        <div class="card-img" style="background:#E0CEB2;">
+          <img src="img15.jpg" alt="Gỗ Sến Xẻ Hộp Quy Cách"
+            onerror="this.style.display='none';this.parentElement.querySelector('.card-img-placeholder').style.display='flex'">
+          <div class="card-img-placeholder" style="display:none;">🪵</div>
+          <span class="badge badge-green">SẴN CÓ</span>
+          <button class="eye-btn" title="Xem nhanh">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1C1C1E" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+        <div class="card-body">
+          <div class="wood-type">GỖ SẾN HỘP</div>
+          <div class="card-name">Gỗ Sến Xẻ Hộp Quy Cách</div>
+          <div class="card-spec">Dày 5cm, rộng 20cm</div>
+        </div>
+      </div>
+
+      <!-- Card 12 -->
+      <div class="product-card" data-category="do-tho" data-wood="mit">
+        <div class="card-img" style="background:#C8B89C;">
+          <img src="img10.jpg" alt="Nhà Gỗ 5 Gian Truyền Thống"
+            onerror="this.style.display='none';this.parentElement.querySelector('.card-img-placeholder').style.display='flex'">
+          <div class="card-img-placeholder" style="display:none;">🏠</div>
+          <span class="badge badge-amber">ĐẶT LÀM</span>
+          <button class="eye-btn" title="Xem nhanh">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1C1C1E" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+        <div class="card-body">
+          <div class="wood-type">GỖ THÔNG</div>
+          <div class="card-name">Nhà Gỗ 5 Gian Truyền Thống</div>
+          <div class="card-spec">Thi công trọn gói</div>
+        </div>
+      </div>
+
+      <!-- Card 13 (NEW) -->
+      <div class="product-card" data-category="ban-ghe" data-wood="huong">
+        <div class="card-img" style="background:#F0DEC0;">
+          <img src="img7.jpg" alt="Bộ trường kỷ 5 món gỗ Hương"
+            onerror="this.style.display='none';this.parentElement.querySelector('.card-img-placeholder').style.display='flex'">
+          <div class="card-img-placeholder" style="display:none;">🪑</div>
+          <span class="badge badge-amber">ĐẶT LÀM</span>
+          <button class="eye-btn" title="Xem nhanh">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1C1C1E" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+        <div class="card-body">
+          <div class="wood-type">GỖ HƯƠNG</div>
+          <div class="card-name">Bộ trường kỷ 5 món gỗ Hương</div>
+          <div class="card-spec">Chạm khắc thủ công tinh xảo</div>
+        </div>
+      </div>
+
+      <!-- Card 14 (NEW) -->
+      <div class="product-card" data-category="do-tho" data-wood="got-do">
+        <div class="card-img" style="background:#DDD0B8;">
+          <img src="img4.jpg" alt="Tủ thờ gỗ Gõ Đỏ chạm tứ linh"
+            onerror="this.style.display='none';this.parentElement.querySelector('.card-img-placeholder').style.display='flex'">
+          <div class="card-img-placeholder" style="display:none;">🏛️</div>
+          <span class="badge badge-green">SẴN CÓ</span>
+          <button class="eye-btn" title="Xem nhanh">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1C1C1E" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+        <div class="card-body">
+          <div class="wood-type">GỖ GÕ ĐỎ</div>
+          <div class="card-name">Tủ thờ gỗ Gõ Đỏ chạm tứ linh</div>
+          <div class="card-spec">Chạm khắc tứ linh tinh xảo</div>
+        </div>
+      </div>
+
+      <!-- Card 15 (NEW) -->
+      <div class="product-card" data-category="cua-go" data-wood="lim">
+        <div class="card-img" style="background:#D0C4A8;">
+          <img src="img1.jpg" alt="Cửa kính kết hợp gỗ Lim"
+            onerror="this.style.display='none';this.parentElement.querySelector('.card-img-placeholder').style.display='flex'">
+          <div class="card-img-placeholder" style="display:none;">🚪</div>
+          <span class="badge badge-green">SẴN CÓ</span>
+          <button class="eye-btn" title="Xem nhanh">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1C1C1E" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+        <div class="card-body">
+          <div class="wood-type">GỖ LIM</div>
+          <div class="card-name">Cửa kính kết hợp gỗ Lim</div>
+          <div class="card-spec">Khung gỗ Lim nguyên khối</div>
+        </div>
+      </div>
+
+      <!-- Card 16 (NEW) -->
+      <div class="product-card" data-category="go-nguyen-lieu" data-wood="tau">
+        <div class="card-img" style="background:#CEC0A4;">
+          <img src="img4.jpg" alt="Gỗ Táu tròn nhập cảng 50-90cm"
+            onerror="this.style.display='none';this.parentElement.querySelector('.card-img-placeholder').style.display='flex'">
+          <div class="card-img-placeholder" style="display:none;">🪵</div>
+          <span class="badge badge-green">SẴN CÓ</span>
+          <button class="eye-btn" title="Xem nhanh">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1C1C1E" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+        <div class="card-body">
+          <div class="wood-type">GỖ TÁU</div>
+          <div class="card-name">Gỗ Táu tròn nhập cảng 50-90cm</div>
+          <div class="card-spec">Đường kính 50–90cm</div>
+        </div>
+      </div>
+
+      <!-- Card 17 (NEW) -->
+      <div class="product-card" data-category="giuong-tu" data-wood="sen">
+        <div class="card-img" style="background:#D4C6AC;">
+          <img src="img16.jpg" alt="Giường hộp gỗ Sến 1m8"
+            onerror="this.style.display='none';this.parentElement.querySelector('.card-img-placeholder').style.display='flex'">
+          <div class="card-img-placeholder" style="display:none;">🛏️</div>
+          <span class="badge badge-green">SẴN CÓ</span>
+          <button class="eye-btn" title="Xem nhanh">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1C1C1E" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+        <div class="card-body">
+          <div class="wood-type">GỖ SẾN</div>
+          <div class="card-name">Giường hộp gỗ Sến 1m8</div>
+          <div class="card-spec">Kích thước: 1m8 x 2m</div>
+        </div>
+      </div>
+
+      <!-- Card 18 (NEW) -->
+      <div class="product-card" data-category="sap" data-wood="cam">
+        <div class="card-img" style="background:#E2D0B4;">
+          <img src="img2.jpg" alt="Sập gỗ Cẩm chạm rồng phượng"
+            onerror="this.style.display='none';this.parentElement.querySelector('.card-img-placeholder').style.display='flex'">
+          <div class="card-img-placeholder" style="display:none;">🪑</div>
+          <span class="badge badge-amber">ĐẶT LÀM</span>
+          <button class="eye-btn" title="Xem nhanh">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1C1C1E" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+        <div class="card-body">
+          <div class="wood-type">GỖ CẨM</div>
+          <div class="card-name">Sập gỗ Cẩm chạm rồng phượng</div>
+          <div class="card-spec">Chạm rồng phượng tinh xảo</div>
+        </div>
+      </div>
+
+      <!-- No results message -->
+      <div class="no-results" id="no-results">Không tìm thấy sản phẩm phù hợp. Vui lòng thử lại với bộ lọc khác.</div>
+
+    </div><!-- /product-grid -->
+  </main>
+
+</div><!-- /page-body -->
+
+<!-- FOOTER -->
+<footer style="background:#1C1C1E;color:#fff;padding:4rem 5rem 2rem">
+  <div style="display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem">
+    <div>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:1rem">
+        <div style="width:32px;height:32px;background:#F59B00;display:flex;align-items:center;justify-content:center;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <div><div style="font-weight:800;font-size:1rem;color:#fff">LÂM SẢN ĐỨC CƯỜNG</div></div>
+      </div>
+      <p style="font-size:0.8rem;color:rgba(255,255,255,0.4);line-height:1.9;max-width:260px">Chuyên cung cấp gỗ khối, gỗ xẻ và đồ nội thất gỗ tự nhiên cao cấp. Hơn 20 năm uy tín tại Thanh Hóa.</p>
+      <div style="margin-top:1.2rem;display:flex;gap:0.8rem">
+        <a href="tel:0969910136" style="background:#F59B00;color:#fff;padding:0.5rem 1rem;border-radius:4px;font-size:0.75rem;font-weight:700;text-decoration:none">📞 0969.910.136</a>
+        <a href="https://zalo.me/0969910136" target="_blank" style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);padding:0.5rem 1rem;border-radius:4px;font-size:0.75rem;font-weight:600;text-decoration:none">Zalo</a>
+      </div>
+    </div>
+    <div>
+      <h5 style="font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:1.2rem;font-weight:600">Sản phẩm</h5>
+      <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:0.7rem">
+        <li><a href="san-pham.html" style="font-size:0.82rem;color:rgba(255,255,255,0.5);text-decoration:none">Gỗ Lim khối</a></li>
+        <li><a href="san-pham.html" style="font-size:0.82rem;color:rgba(255,255,255,0.5);text-decoration:none">Gỗ Sến khối</a></li>
+        <li><a href="san-pham.html" style="font-size:0.82rem;color:rgba(255,255,255,0.5);text-decoration:none">Gỗ Táu khối</a></li>
+        <li><a href="san-pham.html" style="font-size:0.82rem;color:rgba(255,255,255,0.5);text-decoration:none">Nội thất gỗ</a></li>
+        <li><a href="san-pham.html" style="font-size:0.82rem;color:rgba(255,255,255,0.5);text-decoration:none">Cửa chạm khắc</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5 style="font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:1.2rem;font-weight:600">Dịch vụ</h5>
+      <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:0.7rem">
+        <li><a href="dich-vu.html" style="font-size:0.82rem;color:rgba(255,255,255,0.5);text-decoration:none">Cưa xẻ theo yêu cầu</a></li>
+        <li><a href="dich-vu.html" style="font-size:0.82rem;color:rgba(255,255,255,0.5);text-decoration:none">Chạm khắc thủ công</a></li>
+        <li><a href="dich-vu.html" style="font-size:0.82rem;color:rgba(255,255,255,0.5);text-decoration:none">Thi công nội thất</a></li>
+        <li><a href="dich-vu.html" style="font-size:0.82rem;color:rgba(255,255,255,0.5);text-decoration:none">Nhà gỗ truyền thống</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5 style="font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:1.2rem;font-weight:600">Liên hệ</h5>
+      <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:0.7rem">
+        <li style="font-size:0.82rem;color:rgba(255,255,255,0.5)">📞 0969.910.136</li>
+        <li style="font-size:0.82rem;color:rgba(255,255,255,0.5)">📞 0983.832.136</li>
+        <li style="font-size:0.82rem;color:rgba(255,255,255,0.5)">📍 Thôn Minh Hùng, Xã Vạn Lộc</li>
+        <li style="font-size:0.82rem;color:rgba(255,255,255,0.5)">🕐 T2-T7: 7:00–18:00</li>
+      </ul>
+    </div>
+  </div>
+  <div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem">
+    <p style="font-size:0.72rem;color:rgba(255,255,255,0.2)">© 2025 Công Ty TNHH Lâm Sản Đức Cường · MST: 2802151649 · Thôn Minh Hùng, Xã Vạn Lộc, Thanh Hóa</p>
+    <p style="font-size:0.72rem;color:#F59B00">Chất lượng là danh dự</p>
+  </div>
+</footer>
+
+<!-- FLOATING BUTTONS -->
+<div class="float-btns">
+  <a href="tel:0969910136" class="float-btn float-btn-orange">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.09 2.18 2 2 0 012.09 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l.86-.86a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+    Gọi Anh Cường
+  </a>
+  <a href="https://zalo.me/0969910136" target="_blank" class="float-btn float-btn-dark">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+    Nhắn Zalo
+  </a>
+</div>
+
+<script>
+  // ── Tab category mapping ──────────────────────────────────────────────────
+  // Maps tab data-tab-category to the data-category values on product cards
+  const TAB_CATEGORY_MAP = {
+    'all': null,                                      // show everything
+    'noi-that': ['ban-ghe', 'giuong-tu', 'do-tho', 'sap', 'cua-go'],
+    'go-nguyen-lieu': ['go-nguyen-lieu'],
+    'phu-kien': []                                    // none currently tagged
+  };
+
+  let activeTabCategory = 'all'; // track active tab
+
+  // ── Core filter function ──────────────────────────────────────────────────
+  function applyFilters() {
+    const cards = document.querySelectorAll('.product-card');
+
+    // Gather checked checkboxes
+    const checkedCategories = [...document.querySelectorAll('input[data-filter="category"]:checked')].map(el => el.value);
+    const checkedWoods      = [...document.querySelectorAll('input[data-filter="wood"]:checked')].map(el => el.value);
+
+    const noFilters = checkedCategories.length === 0 && checkedWoods.length === 0;
+
+    // Tab-level category restriction
+    const tabCategories = TAB_CATEGORY_MAP[activeTabCategory]; // null = all, [] = none, [...] = list
+
+    let visibleCount = 0;
+
+    cards.forEach(card => {
+      const cardCategory = card.dataset.category || '';
+      const cardWood     = card.dataset.wood || '';
+
+      // Tab filter
+      let passesTab = true;
+      if (tabCategories !== null) {
+        passesTab = tabCategories.includes(cardCategory);
+      }
+
+      // Checkbox filter (AND between groups, OR within group)
+      let passesCategory = noFilters || checkedCategories.length === 0 || checkedCategories.includes(cardCategory);
+      let passesWood     = noFilters || checkedWoods.length === 0      || checkedWoods.includes(cardWood);
+
+      const visible = passesTab && passesCategory && passesWood;
+      card.classList.toggle('hidden', !visible);
+      if (visible) visibleCount++;
+    });
+
+    // Update result count
+    document.getElementById('count-num').textContent = visibleCount;
+
+    // Show/hide no-results message
+    const noResults = document.getElementById('no-results');
+    noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+  }
+
+  // ── Tab buttons ───────────────────────────────────────────────────────────
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', function () {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      this.classList.add('active');
+      activeTabCategory = this.dataset.tabCategory || 'all';
+      applyFilters();
+    });
+  });
+
+  // ── Apply filter button ───────────────────────────────────────────────────
+  document.getElementById('btn-apply-filter').addEventListener('click', applyFilters);
+
+  // ── Clear filter button ───────────────────────────────────────────────────
+  document.getElementById('btn-clear-filter').addEventListener('click', function () {
+    document.querySelectorAll('input[data-filter]').forEach(cb => { cb.checked = false; });
+    applyFilters();
+  });
+
+  // ── Live filter on checkbox change ────────────────────────────────────────
+  document.querySelectorAll('input[data-filter]').forEach(cb => {
+    cb.addEventListener('change', applyFilters);
+  });
+
+  // ── Init ──────────────────────────────────────────────────────────────────
+  applyFilters();
+</script>
+
+</body>
+</html>

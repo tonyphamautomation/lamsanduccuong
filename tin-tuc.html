@@ -1,0 +1,1564 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tin tức & Kiến thức gỗ | Gỗ Đức Cường</title>
+  <meta name="description" content="Chia sẻ kinh nghiệm, kiến thức về gỗ và nội thất từ đội ngũ Đức Cường. Cập nhật tin tức mới nhất về gỗ tự nhiên, nội thất và công trình." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange: #F59B00;
+      --orange-dark: #D98A00;
+      --orange-light: #FFF3CC;
+      --dark: #1C1C1E;
+      --dark2: #2C2C2E;
+      --gray-900: #111827;
+      --gray-700: #374151;
+      --gray-500: #6B7280;
+      --gray-300: #D1D5DB;
+      --gray-100: #F3F4F6;
+      --gray-50: #F9FAFB;
+      --white: #FFFFFF;
+      --border: #E5E7EB;
+      --radius: 12px;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+      --shadow-md: 0 4px 16px rgba(0,0,0,0.10);
+      --shadow-lg: 0 8px 32px rgba(0,0,0,0.13);
+      --transition: 0.22s ease;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Be Vietnam Pro', sans-serif;
+      font-size: 15px;
+      color: var(--gray-700);
+      background: var(--white);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; height: auto; }
+    ul { list-style: none; }
+
+    /* ─── NAVBAR ─── */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      height: 68px;
+      display: flex;
+      align-items: center;
+      padding: 0 5rem;
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      gap: 0;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      flex-shrink: 0;
+      margin-right: 2.5rem;
+    }
+
+    .nav-logo-icon {
+      width: 40px;
+      height: 40px;
+      flex-shrink: 0;
+    }
+
+    .nav-logo-text .brand-name {
+      display: block;
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--gray-900);
+      letter-spacing: 0.04em;
+      line-height: 1.1;
+    }
+
+    .nav-logo-text .brand-sub {
+      display: block;
+      font-size: 9.5px;
+      font-weight: 500;
+      color: var(--orange);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.1rem;
+      flex: 1;
+    }
+
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--gray-700);
+      padding: 6px 13px;
+      border-radius: 6px;
+      transition: color var(--transition), background var(--transition);
+      white-space: nowrap;
+      border-bottom: 2px solid transparent;
+    }
+
+    .nav-links a:hover {
+      color: var(--orange);
+      background: var(--orange-light);
+    }
+
+    .nav-links a.active {
+      color: var(--orange);
+      border-bottom: 2px solid var(--orange);
+      background: transparent;
+      border-radius: 0;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+      margin-left: auto;
+    }
+
+    .nav-search {
+      display: flex;
+      align-items: center;
+      background: var(--gray-100);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0 12px;
+      gap: 7px;
+      height: 38px;
+      transition: border-color var(--transition);
+    }
+
+    .nav-search:focus-within {
+      border-color: var(--orange);
+      background: var(--white);
+    }
+
+    .nav-search svg { color: var(--gray-500); flex-shrink: 0; }
+
+    .nav-search input {
+      border: none;
+      background: transparent;
+      outline: none;
+      font-family: 'Be Vietnam Pro', sans-serif;
+      font-size: 13.5px;
+      color: var(--gray-900);
+      width: 160px;
+    }
+
+    .nav-search input::placeholder { color: var(--gray-500); }
+
+    .btn-baogia {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--orange);
+      color: var(--white);
+      font-family: 'Be Vietnam Pro', sans-serif;
+      font-size: 13.5px;
+      font-weight: 600;
+      padding: 0 18px;
+      height: 38px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+      white-space: nowrap;
+    }
+
+    .btn-baogia:hover {
+      background: var(--orange-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(245,155,0,0.35);
+    }
+
+    /* ─── PAGE HEADER ─── */
+    .page-header {
+      background: linear-gradient(135deg, var(--gray-50) 0%, #FFF8E7 100%);
+      padding: 3rem 5rem 2.8rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--gray-500);
+      margin-bottom: 1rem;
+    }
+
+    .breadcrumb a { color: var(--gray-500); transition: color var(--transition); }
+    .breadcrumb a:hover { color: var(--orange); }
+    .breadcrumb .sep { color: var(--gray-300); }
+    .breadcrumb .current { color: var(--orange); font-weight: 500; }
+
+    .page-header h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--gray-900);
+      line-height: 1.2;
+      margin-bottom: 0.6rem;
+    }
+
+    .page-header h1 span { color: var(--orange); }
+
+    .page-header p {
+      font-size: 15.5px;
+      color: var(--gray-500);
+      max-width: 560px;
+    }
+
+    /* ─── MAIN LAYOUT ─── */
+    .main-wrap {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 2.5rem 5rem 4rem;
+    }
+
+    /* ─── FEATURED ARTICLE ─── */
+    .featured-section { margin-bottom: 3rem; }
+
+    .featured-card {
+      display: flex;
+      background: var(--dark);
+      border-radius: 18px;
+      overflow: hidden;
+      min-height: 380px;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+    }
+
+    .featured-img {
+      width: 52%;
+      flex-shrink: 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .featured-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .featured-card:hover .featured-img img { transform: scale(1.04); }
+
+    .featured-img::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, transparent 60%, var(--dark) 100%);
+    }
+
+    .featured-body {
+      flex: 1;
+      padding: 2.5rem 2.8rem 2.5rem 2.2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0;
+    }
+
+    .featured-badges {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 1.1rem;
+    }
+
+    .badge-hot {
+      background: var(--orange);
+      color: var(--white);
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      padding: 3px 10px;
+      border-radius: 20px;
+      text-transform: uppercase;
+    }
+
+    .badge-cat {
+      background: rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.8);
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      padding: 3px 10px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      border: 1px solid rgba(255,255,255,0.18);
+    }
+
+    .featured-body h2 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.35;
+      margin-bottom: 0.9rem;
+    }
+
+    .featured-meta {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 12.5px;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 1rem;
+    }
+
+    .featured-meta span { display: flex; align-items: center; gap: 5px; }
+
+    .featured-excerpt {
+      font-size: 14.5px;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.7;
+      margin-bottom: 1.6rem;
+    }
+
+    .btn-read {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--orange);
+      color: var(--white);
+      font-size: 14px;
+      font-weight: 600;
+      padding: 11px 22px;
+      border-radius: 8px;
+      transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+      align-self: flex-start;
+    }
+
+    .btn-read:hover {
+      background: var(--orange-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(245,155,0,0.4);
+    }
+
+    /* ─── CATEGORY FILTER ─── */
+    .filter-section { margin-bottom: 2.5rem; }
+
+    .filter-pills {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 7px 16px;
+      border-radius: 999px;
+      font-size: 13.5px;
+      font-weight: 500;
+      border: 1.5px solid var(--border);
+      background: var(--white);
+      color: var(--gray-700);
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .pill:hover, .pill.active {
+      background: var(--orange);
+      border-color: var(--orange);
+      color: var(--white);
+      box-shadow: 0 3px 10px rgba(245,155,0,0.25);
+    }
+
+    /* ─── CONTENT + SIDEBAR ─── */
+    .content-sidebar {
+      display: flex;
+      gap: 2.2rem;
+      align-items: flex-start;
+    }
+
+    .content-area { flex: 0 0 68%; min-width: 0; }
+    .sidebar { flex: 0 0 calc(32% - 2.2rem); min-width: 0; }
+
+    /* ─── ARTICLES GRID ─── */
+    .articles-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.4rem;
+    }
+
+    .article-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .article-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: #F5C04A;
+    }
+
+    .article-img {
+      width: 100%;
+      height: 200px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .article-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .article-card:hover .article-img img { transform: scale(1.06); }
+
+    .article-body {
+      padding: 1.1rem 1.1rem 1.3rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .article-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.55rem;
+    }
+
+    .cat-tag {
+      display: inline-block;
+      background: var(--orange-light);
+      color: var(--orange);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 4px;
+    }
+
+    .article-date {
+      font-size: 11.5px;
+      color: var(--gray-500);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .article-title {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: var(--gray-900);
+      line-height: 1.45;
+      margin-bottom: 0.55rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      transition: color var(--transition);
+    }
+
+    .article-card:hover .article-title { color: var(--orange); }
+
+    .article-excerpt {
+      font-size: 13px;
+      color: var(--gray-500);
+      line-height: 1.6;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      flex: 1;
+      margin-bottom: 0.9rem;
+    }
+
+    .read-more {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--orange);
+      transition: gap var(--transition), color var(--transition);
+    }
+
+    .read-more:hover { gap: 9px; }
+
+    /* ─── PAGINATION ─── */
+    .pagination {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 2.2rem;
+    }
+
+    .page-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      border: 1.5px solid var(--border);
+      background: var(--white);
+      color: var(--gray-700);
+      cursor: pointer;
+      transition: all var(--transition);
+      text-decoration: none;
+    }
+
+    .page-btn:hover, .page-btn.active {
+      background: var(--orange);
+      border-color: var(--orange);
+      color: var(--white);
+    }
+
+    /* ─── SIDEBAR ─── */
+    .sidebar-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 1.5rem;
+    }
+
+    .sidebar-card-head {
+      padding: 1rem 1.2rem 0.7rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .sidebar-card-head h3 {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: var(--gray-900);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .sidebar-card-head h3::before {
+      content: '';
+      display: inline-block;
+      width: 3px;
+      height: 16px;
+      background: var(--orange);
+      border-radius: 2px;
+    }
+
+    .sidebar-card-body { padding: 0.8rem 1.2rem 1rem; }
+
+    /* Popular posts */
+    .popular-item {
+      display: flex;
+      gap: 10px;
+      padding: 0.65rem 0;
+      border-bottom: 1px solid var(--gray-100);
+      align-items: flex-start;
+    }
+
+    .popular-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+    .popular-img {
+      width: 62px;
+      height: 52px;
+      border-radius: 7px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .popular-img img { width: 100%; height: 100%; object-fit: cover; }
+
+    .popular-info { flex: 1; }
+
+    .popular-title {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--gray-900);
+      line-height: 1.45;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      transition: color var(--transition);
+      margin-bottom: 3px;
+    }
+
+    .popular-item:hover .popular-title { color: var(--orange); }
+
+    .popular-date {
+      font-size: 11px;
+      color: var(--gray-500);
+    }
+
+    /* Categories */
+    .cat-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid var(--gray-100);
+      font-size: 13.5px;
+      cursor: pointer;
+      transition: color var(--transition);
+    }
+
+    .cat-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .cat-item:hover { color: var(--orange); }
+
+    .cat-item .cat-name { display: flex; align-items: center; gap: 7px; }
+
+    .cat-item .cat-name::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--orange);
+      flex-shrink: 0;
+    }
+
+    .cat-count {
+      background: var(--gray-100);
+      color: var(--gray-500);
+      font-size: 11.5px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* CTA Card */
+    .sidebar-cta {
+      background: linear-gradient(135deg, var(--orange) 0%, #E8900A 100%);
+      border-radius: var(--radius);
+      padding: 1.6rem 1.4rem;
+      text-align: center;
+      box-shadow: 0 6px 20px rgba(245,155,0,0.3);
+    }
+
+    .sidebar-cta .cta-icon {
+      width: 52px;
+      height: 52px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+    }
+
+    .sidebar-cta h3 {
+      font-size: 15.5px;
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 0.4rem;
+    }
+
+    .sidebar-cta p {
+      font-size: 12.5px;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 1rem;
+      line-height: 1.5;
+    }
+
+    .sidebar-cta .phone {
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: 0.03em;
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    .btn-zalo-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      background: var(--dark);
+      color: var(--white);
+      font-size: 13.5px;
+      font-weight: 600;
+      padding: 10px 20px;
+      border-radius: 8px;
+      width: 100%;
+      transition: background var(--transition), transform var(--transition);
+    }
+
+    .btn-zalo-cta:hover {
+      background: var(--dark2);
+      transform: translateY(-2px);
+    }
+
+    /* ─── FOOTER ─── */
+    .footer {
+      background: var(--dark);
+      color: rgba(255,255,255,0.7);
+      padding: 4rem 5rem 0;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1.2fr 1.2fr 1.5fr;
+      gap: 2.5rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .footer-brand .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 1rem;
+    }
+
+    .footer-brand .brand-name { color: var(--white); font-size: 15px; font-weight: 800; }
+    .footer-brand .brand-sub { color: var(--orange); font-size: 10px; }
+
+    .footer-brand p {
+      font-size: 13.5px;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 1.2rem;
+    }
+
+    .footer-socials { display: flex; gap: 8px; }
+
+    .social-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background var(--transition), transform var(--transition);
+      cursor: pointer;
+    }
+
+    .social-btn:hover {
+      background: var(--orange);
+      transform: translateY(-2px);
+    }
+
+    .footer-col h4 {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 1.2rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .footer-col ul li {
+      margin-bottom: 0.6rem;
+    }
+
+    .footer-col ul li a {
+      font-size: 13.5px;
+      color: rgba(255,255,255,0.55);
+      transition: color var(--transition), padding-left var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .footer-col ul li a:hover { color: var(--orange); padding-left: 4px; }
+
+    .footer-contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13.5px;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 0.8rem;
+    }
+
+    .footer-contact-item .icon-wrap {
+      width: 30px;
+      height: 30px;
+      border-radius: 7px;
+      background: rgba(245,155,0,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: -1px;
+    }
+
+    .footer-contact-item a { color: rgba(255,255,255,0.6); transition: color var(--transition); }
+    .footer-contact-item a:hover { color: var(--orange); }
+
+    .footer-bottom {
+      padding: 1.4rem 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12.5px;
+      color: rgba(255,255,255,0.35);
+    }
+
+    .footer-bottom a { color: var(--orange); }
+
+    /* ─── FLOATING BUTTONS ─── */
+    .float-btns {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 999;
+    }
+
+    .float-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 11px 18px;
+      border-radius: 50px;
+      font-family: 'Be Vietnam Pro', sans-serif;
+      font-size: 13.5px;
+      font-weight: 600;
+      text-decoration: none;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.18);
+      transition: transform var(--transition), box-shadow var(--transition);
+      white-space: nowrap;
+    }
+
+    .float-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.22);
+    }
+
+    .float-btn-call { background: var(--orange); color: var(--white); }
+    .float-btn-zalo { background: var(--dark); color: var(--white); }
+
+    .float-btn .dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #4ADE80;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(74,222,128,0.5); }
+      50% { box-shadow: 0 0 0 5px rgba(74,222,128,0); }
+    }
+
+    /* ─── MOBILE RESPONSIVE ─── */
+    @media (max-width: 1100px) {
+      .navbar { padding: 0 2.5rem; }
+      .main-wrap { padding: 2rem 2.5rem 3rem; }
+      .page-header { padding: 2.5rem 2.5rem 2rem; }
+      .footer { padding: 3rem 2.5rem 0; }
+      .articles-grid { grid-template-columns: repeat(2, 1fr); }
+      .nav-search input { width: 120px; }
+    }
+
+    @media (max-width: 900px) {
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+      .content-sidebar { flex-direction: column; }
+      .content-area { flex: none; width: 100%; }
+      .sidebar { flex: none; width: 100%; }
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        padding: 0 1.2rem;
+        height: auto;
+        min-height: 68px;
+        flex-wrap: wrap;
+      }
+
+      .nav-inner { flex-wrap: wrap; gap: 10px; }
+
+      .nav-links {
+        order: 3;
+        width: 100%;
+        overflow-x: auto;
+        gap: 0;
+        padding: 6px 0;
+        border-top: 1px solid var(--border);
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .nav-links::-webkit-scrollbar { display: none; }
+
+      .nav-links a { font-size: 13px; padding: 5px 10px; }
+
+      .nav-right { margin-left: auto; }
+
+      .nav-search { display: none; }
+
+      .page-header { padding: 1.8rem 1.2rem 1.5rem; }
+      .page-header h1 { font-size: 1.6rem; }
+
+      .main-wrap { padding: 1.5rem 1.2rem 2.5rem; }
+
+      .featured-card {
+        flex-direction: column;
+        min-height: auto;
+      }
+
+      .featured-img { width: 100%; height: 220px; }
+      .featured-img::after { background: linear-gradient(to bottom, transparent 60%, var(--dark) 100%); }
+      .featured-body { padding: 1.5rem 1.5rem 1.8rem; }
+      .featured-body h2 { font-size: 1.2rem; }
+
+      .articles-grid { grid-template-columns: 1fr; gap: 1.2rem; }
+
+      .footer { padding: 2.5rem 1.2rem 0; }
+      .footer-grid { grid-template-columns: 1fr; gap: 1.8rem; }
+      .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+
+      .float-btns { bottom: 16px; right: 16px; }
+      .float-btn { padding: 10px 15px; font-size: 12.5px; }
+    }
+
+    /* ─── SCROLLBAR ─── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--gray-100); }
+    ::-webkit-scrollbar-thumb { background: var(--gray-300); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--orange); }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════ NAVBAR ═══════════════════════ -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="duc-cuong-wood.html" class="nav-logo">
+        <img src="logo.png" style="height:46px;width:auto;object-fit:contain" alt="Logo" onerror="this.style.display='none'">
+        <div class="nav-logo-text">
+          <span class="brand-name">LÂM SẢN ĐỨC CƯỜNG</span>
+          <span class="brand-sub">WOOD EXCELLENCE</span>
+        </div>
+      </a>
+
+      <div class="nav-links">
+        <a href="duc-cuong-wood.html">Trang chủ</a>
+        <a href="san-pham.html">Sản phẩm</a>
+        <a href="dich-vu.html">Dịch vụ</a>
+        <a href="du-an.html">Dự án</a>
+        <a href="tin-tuc.html" class="active">Tin tức</a>
+        <a href="lien-he.html">Liên hệ</a>
+      </div>
+
+      <div class="nav-right">
+        <div class="nav-search">
+          <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+          </svg>
+          <input type="text" placeholder="Tìm kiếm bài viết..." />
+        </div>
+        <a href="lien-he.html" class="btn-baogia">
+          <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path d="M9 12h6M9 16h6M17 21H7a2 2 0 01-2-2V5a2 2 0 012-2h7l5 5v11a2 2 0 01-2 2z"/>
+          </svg>
+          Nhận báo giá
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════ PAGE HEADER ═══════════════════════ -->
+  <div class="page-header">
+    <div class="breadcrumb">
+      <a href="duc-cuong-wood.html">Trang chủ</a>
+      <span class="sep">›</span>
+      <span class="current">Tin tức &amp; Kiến thức gỗ</span>
+    </div>
+    <h1>Tin tức &amp; <span>Kiến thức gỗ</span></h1>
+    <p>Chia sẻ kinh nghiệm, kiến thức về gỗ và nội thất từ đội ngũ Đức Cường</p>
+  </div>
+
+  <!-- ═══════════════════════ MAIN CONTENT ═══════════════════════ -->
+  <div class="main-wrap">
+
+    <!-- ── FEATURED ARTICLE ── -->
+    <section class="featured-section">
+      <div class="featured-card">
+        <div class="featured-img">
+          <img src="img8.jpg" alt="Gỗ Lim Nam Phi và Gỗ Lim Việt Nam" loading="eager" />
+        </div>
+        <div class="featured-body">
+          <div class="featured-badges">
+            <span class="badge-hot">✦ Nổi bật</span>
+            <span class="badge-cat">Gỗ cao cấp</span>
+          </div>
+          <h2>Gỗ Lim Nam Phi và Gỗ Lim Việt Nam: Phân biệt, ưu nhược điểm và cách chọn</h2>
+          <div class="featured-meta">
+            <span>
+              <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+              </svg>
+              10/05/2025
+            </span>
+            <span>
+              <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/>
+              </svg>
+              5 phút đọc
+            </span>
+          </div>
+          <p class="featured-excerpt">Nhiều khách hàng băn khoăn giữa gỗ Lim nội và ngoại nhập. Bài viết này giúp bạn hiểu rõ sự khác biệt, từ vân gỗ đến độ bền, giúp đưa ra quyết định phù hợp với công trình và ngân sách của mình.</p>
+          <a href="tin-tuc-1.html" class="btn-read">
+            Đọc bài viết
+            <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CATEGORY FILTER ── -->
+    <section class="filter-section">
+      <div class="filter-pills">
+        <button class="pill active" onclick="filterCat(this, 'all')">
+          <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+          Tất cả
+        </button>
+        <button class="pill" onclick="filterCat(this, 'kien-thuc')">Kiến thức gỗ</button>
+        <button class="pill" onclick="filterCat(this, 'noi-that')">Nội thất</button>
+        <button class="pill" onclick="filterCat(this, 'cong-trinh')">Công trình</button>
+        <button class="pill" onclick="filterCat(this, 'tin-tuc')">Tin tức công ty</button>
+      </div>
+    </section>
+
+    <!-- ── CONTENT + SIDEBAR ── -->
+    <div class="content-sidebar">
+
+      <!-- Content Area -->
+      <main class="content-area">
+        <div class="articles-grid">
+
+          <!-- Card 1 -->
+          <article class="article-card" data-cat="kien-thuc">
+            <div class="article-img">
+              <img src="img13.jpg" alt="Top 5 loại gỗ nhập khẩu" loading="lazy" />
+            </div>
+            <div class="article-body">
+              <div class="article-top">
+                <span class="cat-tag">Kiến thức gỗ</span>
+                <span class="article-date">
+                  <svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+                  </svg>
+                  05/05/2025
+                </span>
+              </div>
+              <h3 class="article-title">Top 5 loại gỗ nhập khẩu phổ biến nhất tại Việt Nam 2025</h3>
+              <p class="article-excerpt">Gỗ Sến, Lim, Táu, Cẩm, Hương — mỗi loại có đặc tính riêng phù hợp với từng không gian và nhu cầu sử dụng khác nhau...</p>
+              <a href="tin-tuc-1.html" class="read-more">
+                Đọc thêm
+                <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="article-card" data-cat="noi-that">
+            <div class="article-img">
+              <img src="img5.jpg" alt="Bàn thờ gỗ gõ đỏ hay gỗ mít" loading="lazy" />
+            </div>
+            <div class="article-body">
+              <div class="article-top">
+                <span class="cat-tag">Nội thất</span>
+                <span class="article-date">
+                  <svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+                  </svg>
+                  28/04/2025
+                </span>
+              </div>
+              <h3 class="article-title">Bàn thờ gỗ gõ đỏ hay gỗ mít: Lựa chọn nào phù hợp?</h3>
+              <p class="article-excerpt">Không gian thờ tự cần được chọn lựa kỹ càng từ chất liệu gỗ đến kiểu dáng chạm khắc, mang lại sự trang nghiêm và bền vững...</p>
+              <a href="tin-tuc-2.html" class="read-more">
+                Đọc thêm
+                <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="article-card" data-cat="cong-trinh">
+            <div class="article-img">
+              <img src="img6.jpg" alt="Công trình nhà gỗ 5 gian" loading="lazy" />
+            </div>
+            <div class="article-body">
+              <div class="article-top">
+                <span class="cat-tag">Công trình</span>
+                <span class="article-date">
+                  <svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+                  </svg>
+                  20/04/2025
+                </span>
+              </div>
+              <h3 class="article-title">Công trình nhà gỗ 5 gian tại Thanh Hóa — Hành trình 3 tháng</h3>
+              <p class="article-excerpt">Từ bản vẽ đến ngôi nhà gỗ hoàn thiện, đây là câu chuyện về một công trình đặc biệt với những kỹ thuật truyền thống...</p>
+              <a href="tin-tuc-3.html" class="read-more">
+                Đọc thêm
+                <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- Card 4 -->
+          <article class="article-card" data-cat="kien-thuc">
+            <div class="article-img">
+              <img src="img15.jpg" alt="Cách bảo quản gỗ truyền thống" loading="lazy" />
+            </div>
+            <div class="article-body">
+              <div class="article-top">
+                <span class="cat-tag">Kiến thức gỗ</span>
+                <span class="article-date">
+                  <svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+                  </svg>
+                  15/04/2025
+                </span>
+              </div>
+              <h3 class="article-title">Cách bảo quản gỗ nhà gỗ truyền thống đúng cách</h3>
+              <p class="article-excerpt">Gỗ tự nhiên cần được bảo quản đúng cách để giữ độ bền và vẻ đẹp theo năm tháng, tránh mối mọt và co ngót...</p>
+              <a href="#" class="read-more">
+                Đọc thêm
+                <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- Card 5 -->
+          <article class="article-card" data-cat="noi-that">
+            <div class="article-img">
+              <img src="img3.jpg" alt="Sập gỗ chân quỳ" loading="lazy" />
+            </div>
+            <div class="article-body">
+              <div class="article-top">
+                <span class="cat-tag">Nội thất</span>
+                <span class="article-date">
+                  <svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+                  </svg>
+                  08/04/2025
+                </span>
+              </div>
+              <h3 class="article-title">Sập gỗ chân quỳ: Nét văn hóa truyền thống trong không gian hiện đại</h3>
+              <p class="article-excerpt">Sập chân quỳ không chỉ là đồ nội thất mà còn là biểu tượng văn hóa của người Việt, kết hợp hài hòa với không gian đương đại...</p>
+              <a href="#" class="read-more">
+                Đọc thêm
+                <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- Card 6 -->
+          <article class="article-card" data-cat="tin-tuc">
+            <div class="article-img">
+              <img src="img12.jpg" alt="Đức Cường cung cấp gỗ Lim 200m³" loading="lazy" />
+            </div>
+            <div class="article-body">
+              <div class="article-top">
+                <span class="cat-tag">Tin tức</span>
+                <span class="article-date">
+                  <svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+                  </svg>
+                  01/04/2025
+                </span>
+              </div>
+              <h3 class="article-title">Đức Cường nhận cung cấp lô gỗ Lim 200m³ cho dự án resort Sầm Sơn</h3>
+              <p class="article-excerpt">Tháng 4/2025, xưởng Đức Cường hoàn thành đơn hàng lớn nhất năm cho dự án nghỉ dưỡng cao cấp tại Sầm Sơn...</p>
+              <a href="#" class="read-more">
+                Đọc thêm
+                <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </a>
+            </div>
+          </article>
+
+        </div><!-- /articles-grid -->
+
+        <!-- Pagination -->
+        <div class="pagination">
+          <a href="#" class="page-btn">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+              <path d="M15 18l-6-6 6-6"/>
+            </svg>
+          </a>
+          <a href="#" class="page-btn active">1</a>
+          <a href="#" class="page-btn">2</a>
+          <a href="#" class="page-btn">3</a>
+          <span style="color:var(--gray-300);font-size:14px;padding:0 4px;">…</span>
+          <a href="#" class="page-btn">8</a>
+          <a href="#" class="page-btn">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+              <path d="M9 18l6-6-6-6"/>
+            </svg>
+          </a>
+        </div>
+      </main><!-- /content-area -->
+
+      <!-- ── SIDEBAR ── -->
+      <aside class="sidebar">
+
+        <!-- Popular Posts -->
+        <div class="sidebar-card">
+          <div class="sidebar-card-head">
+            <h3>Bài viết phổ biến</h3>
+          </div>
+          <div class="sidebar-card-body">
+
+            <a href="#" class="popular-item" style="display:flex;gap:10px;padding:0.65rem 0;border-bottom:1px solid var(--gray-100);align-items:flex-start;text-decoration:none;">
+              <div class="popular-img">
+                <img src="img8.jpg" alt="Gỗ Lim Nam Phi" loading="lazy" />
+              </div>
+              <div class="popular-info">
+                <div class="popular-title">Gỗ Lim Nam Phi và Gỗ Lim Việt Nam: Phân biệt và cách chọn</div>
+                <div class="popular-date">10/05/2025</div>
+              </div>
+            </a>
+
+            <a href="#" class="popular-item" style="display:flex;gap:10px;padding:0.65rem 0;border-bottom:1px solid var(--gray-100);align-items:flex-start;text-decoration:none;">
+              <div class="popular-img">
+                <img src="img13.jpg" alt="Top 5 gỗ nhập khẩu" loading="lazy" />
+              </div>
+              <div class="popular-info">
+                <div class="popular-title">Top 5 loại gỗ nhập khẩu phổ biến nhất Việt Nam 2025</div>
+                <div class="popular-date">05/05/2025</div>
+              </div>
+            </a>
+
+            <a href="#" class="popular-item" style="display:flex;gap:10px;padding:0.65rem 0;border-bottom:1px solid var(--gray-100);align-items:flex-start;text-decoration:none;">
+              <div class="popular-img">
+                <img src="img6.jpg" alt="Nhà gỗ 5 gian" loading="lazy" />
+              </div>
+              <div class="popular-info">
+                <div class="popular-title">Công trình nhà gỗ 5 gian tại Thanh Hóa — Hành trình 3 tháng</div>
+                <div class="popular-date">20/04/2025</div>
+              </div>
+            </a>
+
+            <a href="#" class="popular-item" style="display:flex;gap:10px;padding:0.65rem 0;align-items:flex-start;text-decoration:none;">
+              <div class="popular-img">
+                <img src="img3.jpg" alt="Sập gỗ chân quỳ" loading="lazy" />
+              </div>
+              <div class="popular-info">
+                <div class="popular-title">Sập gỗ chân quỳ: Nét văn hóa trong không gian hiện đại</div>
+                <div class="popular-date">08/04/2025</div>
+              </div>
+            </a>
+
+          </div>
+        </div><!-- /popular posts -->
+
+        <!-- Categories -->
+        <div class="sidebar-card">
+          <div class="sidebar-card-head">
+            <h3>Danh mục</h3>
+          </div>
+          <div class="sidebar-card-body">
+            <div class="cat-item">
+              <span class="cat-name">Kiến thức gỗ</span>
+              <span class="cat-count">14</span>
+            </div>
+            <div class="cat-item">
+              <span class="cat-name">Nội thất</span>
+              <span class="cat-count">9</span>
+            </div>
+            <div class="cat-item">
+              <span class="cat-name">Công trình</span>
+              <span class="cat-count">7</span>
+            </div>
+            <div class="cat-item">
+              <span class="cat-name">Tin tức công ty</span>
+              <span class="cat-count">5</span>
+            </div>
+            <div class="cat-item">
+              <span class="cat-name">Gỗ cao cấp</span>
+              <span class="cat-count">11</span>
+            </div>
+            <div class="cat-item">
+              <span class="cat-name">Bảo quản &amp; xử lý</span>
+              <span class="cat-count">6</span>
+            </div>
+          </div>
+        </div><!-- /categories -->
+
+        <!-- CTA Card -->
+        <div class="sidebar-cta">
+          <div class="cta-icon">
+            <svg width="26" height="26" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2">
+              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.05 1.23 2 2 0 012 .05h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+            </svg>
+          </div>
+          <h3>Cần tư vấn về gỗ?</h3>
+          <p>Đội ngũ chuyên gia Đức Cường luôn sẵn sàng giải đáp mọi thắc mắc của bạn</p>
+          <a href="tel:0969910136" class="phone">0969 910 136</a>
+          <a href="https://zalo.me/0969910136" target="_blank" rel="noopener" class="btn-zalo-cta">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
+              <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 16.412c-.195.39-.588.613-1.003.585-.195-.014-.387-.083-.55-.2l-2.223-1.603c-.374-.27-.46-.79-.19-1.164l.088-.12c.27-.374.79-.46 1.164-.19l.763.55.847-1.71c-.712-.548-1.562-.893-2.454-1.003l-.03.016c-.095.05-.19.1-.286.15L9.96 14.29l-1.82-2.633c-.082-.12-.12-.26-.11-.4.015-.155.083-.302.195-.413.224-.22.582-.23.815-.022l.9.824 1.46-3.217c.013-.03.03-.06.048-.088-.583-.008-1.16.06-1.718.197L8.28 9.77 7.1 8.376c-.42-.5-.348-1.246.158-1.657l.098-.077c.506-.41 1.25-.338 1.66.168l.698.862.668-1.073c-.967.317-1.886.85-2.672 1.58l-.004.004c-.005.005-.01.01-.016.015-.048.048-.095.097-.14.146C6.028 9.677 5.14 11.326 5 13.124c-.14 1.8.49 3.558 1.726 4.808.042.043.086.086.13.128 1.253 1.215 2.96 1.903 4.77 1.87 3.635-.066 6.572-3.044 6.572-6.68V7.68L16.07 8.9c-.266.197-.62.25-.934.138l-.003-.002-.87-.328.87-2.027c-.38-.06-.768-.09-1.157-.09-2.026 0-3.916.845-5.27 2.384L8.7 10.04l-.672-.776c-.327-.378-.285-.95.094-1.278.378-.327.95-.285 1.277.094l.105.12.626.724 1.46-3.217c.013-.03.03-.06.048-.088.56-.042 1.124-.02 1.677.064l-.9 1.99.87.327c.127.048.264.055.396.022l2.13-2.13v5.607c0 2.873-2.306 5.22-5.178 5.274-1.416.026-2.768-.508-3.786-1.487-.04-.038-.08-.076-.118-.115-.946-1.003-1.45-2.38-1.343-3.794.107-1.413.804-2.7 1.913-3.553l.015-.012.016-.013.14-.11.003-.003c.82-.66 1.8-1.067 2.83-1.172l-.625 1.376.87.327c.126.048.263.055.396.022l1.27-1.27.01.006c.02.013.04.025.06.036l.003.002 2.223 1.604c.125.09.22.213.272.355.052.143.057.3.014.445-.043.145-.133.273-.257.363z"/>
+            </svg>
+            Nhắn Zalo ngay
+          </a>
+        </div><!-- /cta -->
+
+      </aside><!-- /sidebar -->
+
+    </div><!-- /content-sidebar -->
+
+  </div><!-- /main-wrap -->
+
+  <!-- ═══════════════════════ FOOTER ═══════════════════════ -->
+  <footer class="footer">
+    <div class="footer-grid">
+
+      <!-- Brand -->
+      <div class="footer-col footer-brand">
+        <div class="footer-logo">
+          <svg width="36" height="36" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="20,2 36,11 36,29 20,38 4,29 4,11" fill="#F59B00"/>
+            <polygon points="20,6 33,13.5 33,28.5 20,36 7,28.5 7,13.5" fill="#E8900A"/>
+            <path d="M13 15 L13 25 L17.5 25 C20.5 25 23 22.8 23 20 C23 17.2 20.5 15 17.5 15 Z M15.5 17.5 L17.5 17.5 C19 17.5 20.5 18.6 20.5 20 C20.5 21.4 19 22.5 17.5 22.5 L15.5 22.5 Z" fill="white"/>
+            <path d="M25 15 L25 25 L27.5 25 L27.5 15 Z" fill="white"/>
+          </svg>
+          <div>
+            <div class="brand-name">GỖ ĐỨC CƯỜNG</div>
+            <div class="brand-sub">WOOD EXCELLENCE</div>
+          </div>
+        </div>
+        <p>Chuyên cung cấp gỗ tự nhiên cao cấp và thi công nội thất gỗ truyền thống. Hơn 15 năm kinh nghiệm trong ngành gỗ tại Việt Nam.</p>
+        <div class="footer-socials">
+          <div class="social-btn" title="Facebook">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="rgba(255,255,255,0.7)">
+              <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
+            </svg>
+          </div>
+          <div class="social-btn" title="Zalo">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="rgba(255,255,255,0.7)">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15v-4H7l5-8v4h4l-5 8z"/>
+            </svg>
+          </div>
+          <div class="social-btn" title="YouTube">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="rgba(255,255,255,0.7)">
+              <path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 00-1.95 1.96A29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Products -->
+      <div class="footer-col">
+        <h4>Sản phẩm</h4>
+        <ul>
+          <li><a href="san-pham.html">› Gỗ tròn &amp; xẻ hộp</a></li>
+          <li><a href="san-pham.html">› Nhà gỗ cổ truyền</a></li>
+          <li><a href="san-pham.html">› Đồ thờ &amp; bàn thờ</a></li>
+          <li><a href="san-pham.html">› Sập gỗ &amp; trường kỷ</a></li>
+          <li><a href="san-pham.html">› Cột kèo &amp; vì kèo</a></li>
+          <li><a href="san-pham.html">› Gỗ ván sàn</a></li>
+        </ul>
+      </div>
+
+      <!-- Services -->
+      <div class="footer-col">
+        <h4>Dịch vụ</h4>
+        <ul>
+          <li><a href="dich-vu.html">› Tư vấn chọn gỗ</a></li>
+          <li><a href="dich-vu.html">› Thi công nhà gỗ</a></li>
+          <li><a href="dich-vu.html">› Chế tác nội thất</a></li>
+          <li><a href="dich-vu.html">› Sấy &amp; xử lý gỗ</a></li>
+          <li><a href="dich-vu.html">› Vận chuyển toàn quốc</a></li>
+          <li><a href="dich-vu.html">› Bảo hành &amp; bảo trì</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div class="footer-col">
+        <h4>Liên hệ</h4>
+        <div class="footer-contact-item">
+          <div class="icon-wrap">
+            <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="#F59B00" stroke-width="2">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
+            </svg>
+          </div>
+          <span>Xã Hoằng Quỳ, Hoằng Hóa, Thanh Hóa</span>
+        </div>
+        <div class="footer-contact-item">
+          <div class="icon-wrap">
+            <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="#F59B00" stroke-width="2">
+              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.05 1.23 2 2 0 012 .05h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+            </svg>
+          </div>
+          <a href="tel:0969910136">0969 910 136</a>
+        </div>
+        <div class="footer-contact-item">
+          <div class="icon-wrap">
+            <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="#F59B00" stroke-width="2">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+            </svg>
+          </div>
+          <a href="mailto:go.ducbuong@gmail.com">go.ducbuong@gmail.com</a>
+        </div>
+        <div class="footer-contact-item">
+          <div class="icon-wrap">
+            <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="#F59B00" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/>
+            </svg>
+          </div>
+          <span>T2–T7: 7:00 – 18:00</span>
+        </div>
+      </div>
+
+    </div><!-- /footer-grid -->
+
+    <div class="footer-bottom">
+      <span>© 2025 Gỗ Đức Cường. Bảo lưu mọi quyền.</span>
+      <span>Thiết kế bởi <a href="#">Đức Cường Wood Team</a></span>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════ FLOATING BUTTONS ═══════════════════════ -->
+  <div class="float-btns">
+    <a href="tel:0969910136" class="float-btn float-btn-call">
+      <div class="dot"></div>
+      <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2">
+        <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.05 1.23 2 2 0 012 .05h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+      </svg>
+      Gọi Anh Cường
+    </a>
+    <a href="https://zalo.me/0969910136" target="_blank" rel="noopener" class="float-btn float-btn-zalo">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="white">
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15v-4H7l5-8v4h4l-5 8z"/>
+      </svg>
+      Nhắn Zalo
+    </a>
+  </div>
+
+  <!-- ═══════════════════════ SCRIPTS ═══════════════════════ -->
+  <script>
+    // Category filter
+    function filterCat(btn, cat) {
+      // Update pill active state
+      document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+
+      // Filter cards
+      const cards = document.querySelectorAll('.article-card');
+      cards.forEach(card => {
+        if (cat === 'all') {
+          card.style.display = 'flex';
+          setTimeout(() => { card.style.opacity = '1'; card.style.transform = ''; }, 10);
+        } else {
+          const cardCat = card.getAttribute('data-cat');
+          const match = (cat === 'kien-thuc' && cardCat === 'kien-thuc') ||
+                        (cat === 'noi-that' && cardCat === 'noi-that') ||
+                        (cat === 'cong-trinh' && cardCat === 'cong-trinh') ||
+                        (cat === 'tin-tuc' && cardCat === 'tin-tuc');
+          if (match) {
+            card.style.display = 'flex';
+            setTimeout(() => { card.style.opacity = '1'; }, 10);
+          } else {
+            card.style.opacity = '0.3';
+            card.style.transform = 'scale(0.98)';
+          }
+        }
+      });
+    }
+
+    // Sticky nav shadow on scroll
+    const navbar = document.querySelector('.navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 10) {
+        navbar.style.boxShadow = '0 2px 16px rgba(0,0,0,0.08)';
+      } else {
+        navbar.style.boxShadow = 'none';
+      }
+    });
+
+    // Search functionality (basic highlight)
+    const searchInput = document.querySelector('.nav-search input');
+    if (searchInput) {
+      searchInput.addEventListener('keyup', function(e) {
+        if (e.key === 'Enter' && this.value.trim()) {
+          const query = this.value.trim().toLowerCase();
+          const cards = document.querySelectorAll('.article-card');
+          cards.forEach(card => {
+            const title = card.querySelector('.article-title')?.textContent.toLowerCase() || '';
+            const excerpt = card.querySelector('.article-excerpt')?.textContent.toLowerCase() || '';
+            if (title.includes(query) || excerpt.includes(query)) {
+              card.style.opacity = '1';
+              card.style.transform = '';
+            } else {
+              card.style.opacity = '0.3';
+              card.style.transform = 'scale(0.98)';
+            }
+          });
+          // Reset pills
+          document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+        }
+        if (e.key === 'Escape' || this.value === '') {
+          document.querySelectorAll('.article-card').forEach(card => {
+            card.style.opacity = '1';
+            card.style.transform = '';
+          });
+          const firstPill = document.querySelector('.pill');
+          if (firstPill) {
+            document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+            firstPill.classList.add('active');
+          }
+        }
+      });
+    }
+  </script>
+
+</body>
+</html>
