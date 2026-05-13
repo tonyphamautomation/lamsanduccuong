@@ -35,10 +35,20 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .nav-cta{background:transparent!important;border:1px solid var(--gold);color:var(--gold)!important;padding:0.45rem 1.4rem;font-size:0.75rem;letter-spacing:0.12em}
 .nav-cta:hover{background:var(--gold)!important;color:var(--dark)!important}
 .nav-cta::after{display:none!important}
+.nav-toggle{display:none;flex-direction:column;justify-content:center;gap:5px;width:38px;height:38px;cursor:pointer;padding:4px;background:none;border:none}
+.nav-toggle span{display:block;width:24px;height:2px;background:#fff;transition:all 0.3s;transform-origin:center}
+.nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-toggle.open span:nth-child(2){opacity:0}
+.nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.nav-mobile{display:none;position:fixed;inset:0;top:72px;background:rgba(26,15,5,0.98);backdrop-filter:blur(20px);z-index:199;flex-direction:column;align-items:center;justify-content:center;gap:0;opacity:0;transition:opacity 0.3s}
+.nav-mobile.open{opacity:1}
+.nav-mobile a{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:rgba(255,255,255,0.7);text-decoration:none;padding:1.1rem 0;letter-spacing:0.04em;transition:color 0.2s;border-bottom:1px solid rgba(200,149,42,0.1);width:80%;text-align:center}
+.nav-mobile a:hover{color:var(--gold2)}
+.nav-mobile .nav-cta-m{margin-top:1.5rem;background:var(--gold);color:var(--dark)!important;padding:0.8rem 2.5rem;border:none;font-size:1rem;border-radius:0}
 
 /* HERO */
 .hero{height:100vh;min-height:700px;position:relative;overflow:hidden;display:flex;align-items:center}
-.hero-bg{position:absolute;inset:0;background-image:url('img14.jpg');background-size:cover;background-position:center 40%;filter:brightness(0.52);transform:scale(1.06);animation:heroZoom 14s ease-out forwards}
+.hero-bg{position:absolute;inset:0;background-image:url('img14.jpg');background-size:cover;background-position:center 40%;filter:brightness(0.65);transform:scale(1.06);animation:heroZoom 14s ease-out forwards}
 @keyframes heroZoom{from{transform:scale(1.06)}to{transform:scale(1.0)}}
 .hero-overlay{position:absolute;inset:0;background:linear-gradient(110deg,rgba(26,15,5,0.82) 0%,rgba(26,15,5,0.18) 55%,transparent 100%)}
 .hero-collage{
@@ -255,6 +265,7 @@ footer{background:var(--dark);border-top:1px solid rgba(200,149,42,0.15)}
 @media(max-width:960px){
   nav{padding:0 1.5rem}
   .nav-links{display:none}
+  .nav-toggle{display:flex}
   .hero-content{padding:0 1.5rem;max-width:100%}
   .hero-collage{display:none}
   .hero-stats{left:1.5rem;bottom:1.5rem;gap:1.5rem}
@@ -275,6 +286,20 @@ footer{background:var(--dark);border-top:1px solid rgba(200,149,42,0.15)}
   .footer-top{grid-template-columns:1fr 1fr;padding:3rem 1.5rem 2rem}
   .footer-bottom{padding:1.5rem}
   .form-row{grid-template-columns:1fr}
+}
+@media(max-width:480px){
+  .hero h1{font-size:2.4rem}
+  .hero-stats{flex-direction:row;gap:1.2rem;bottom:1rem}
+  .hero-stat .n{font-size:1.4rem}
+  .hero-stat .l{font-size:0.6rem}
+  .products-grid{grid-template-columns:1fr}
+  .gallery-grid{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr}
+  .section-h2{font-size:1.7rem}
+  .about-content,.contact-left,.contact-right{padding:3rem 1.2rem}
+  .workshop,.products,.testimonials,.gallery{padding:3rem 1.2rem}
+  .float-btns{bottom:1rem;right:1rem}
+  .float-btn{padding:0.6rem 1rem;font-size:0.7rem}
 }
 </style>
 </head>
@@ -297,7 +322,18 @@ footer{background:var(--dark);border-top:1px solid rgba(200,149,42,0.15)}
     <li><a href="ve-chung-toi.html">Về chúng tôi</a></li>
     <li><a href="lien-he.html" class="nav-cta">Liên hệ</a></li>
   </ul>
+  <button class="nav-toggle" id="navToggle" onclick="toggleMobileNav()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+<div class="nav-mobile" id="navMobile">
+  <a href="san-pham.html" onclick="closeMobileNav()">Sản phẩm</a>
+  <a href="dich-vu.html" onclick="closeMobileNav()">Dịch vụ</a>
+  <a href="du-an.html" onclick="closeMobileNav()">Dự án</a>
+  <a href="tin-tuc.html" onclick="closeMobileNav()">Tin tức</a>
+  <a href="ve-chung-toi.html" onclick="closeMobileNav()">Về chúng tôi</a>
+  <a href="lien-he.html" class="nav-cta-m" onclick="closeMobileNav()">Liên hệ</a>
+</div>
 
 <!-- HERO: nền = kho gỗ tròn nhập cảng (img14), lưới phải = công trình hoàn thiện -->
 <section class="hero" id="home">
@@ -548,6 +584,19 @@ footer{background:var(--dark);border-top:1px solid rgba(200,149,42,0.15)}
         </div>
       </div>
     </div>
+    <div style="margin-top:2rem;border-radius:2px;overflow:hidden;border:1px solid rgba(200,149,42,0.2)">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3767.5!2d105.7!3d19.95!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3136f5b3b3b3b3b3%3A0x0!2sWWGV%2BRQW+V%E1%BA%A1n+L%E1%BB%99c%2C+Thanh+H%C3%B3a!5e0!3m2!1svi!2svn!4v1"
+        width="100%" height="200" style="display:block;border:0;filter:grayscale(30%) contrast(1.05)" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        title="Vị trí Lâm Sản Đức Cường">
+      </iframe>
+      <a href="https://maps.google.com/?q=WWGV%2BRQW+V%E1%BA%A1n+L%E1%BB%99c+Thanh+H%C3%B3a" target="_blank"
+        style="display:flex;align-items:center;justify-content:center;gap:8px;background:var(--dark);padding:0.7rem;font-size:0.72rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold2);text-decoration:none;transition:background 0.2s"
+        onmouseover="this.style.background='#2D1A08'" onmouseout="this.style.background='var(--dark)'">
+        <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" fill="none" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Xem chỉ đường trên Google Maps
+      </a>
+    </div>
   </div>
   <div class="contact-right">
     <div class="section-label">Gửi yêu cầu</div>
@@ -651,7 +700,7 @@ footer{background:var(--dark);border-top:1px solid rgba(200,149,42,0.15)}
 <div class="float-cta">
   <a href="tel:0969910136" class="float-btn float-call">
     <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.86 9.81 19.79 19.79 0 01.79 1.18 2 2 0 012.77 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L7.09 7.91a16 16 0 006 6l.91-.91a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
-    Gọi Anh Cường
+    Gọi Ngay
   </a>
   <a href="https://zalo.me/0969910136" class="float-btn float-zalo" target="_blank">
     <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
@@ -734,6 +783,23 @@ function closeContactModal(){
     }
   }catch(e){}
 })();
+
+// Mobile nav
+function toggleMobileNav(){
+  const btn=document.getElementById('navToggle');
+  const menu=document.getElementById('navMobile');
+  const open=menu.classList.toggle('open');
+  btn.classList.toggle('open',open);
+  menu.style.display=open?'flex':'none';
+  document.body.style.overflow=open?'hidden':'';
+}
+function closeMobileNav(){
+  document.getElementById('navToggle').classList.remove('open');
+  const menu=document.getElementById('navMobile');
+  menu.classList.remove('open');
+  menu.style.display='none';
+  document.body.style.overflow='';
+}
 </script>
 </body>
 </html>

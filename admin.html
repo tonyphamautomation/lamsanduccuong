@@ -100,6 +100,7 @@ body{font-family:'Be Vietnam Pro',sans-serif;background:#0f0a04;color:#fff;min-h
   <div class="adm-body">
     <nav class="adm-nav">
       <div class="adm-nav-item active" onclick="switchTab('products')">📦 Sản phẩm</div>
+      <div class="adm-nav-item" onclick="switchTab('news')">📰 Tin tức</div>
       <div class="adm-nav-item" onclick="switchTab('gallery')">🖼️ Công trình</div>
       <div class="adm-nav-item" onclick="switchTab('settings')">⚙️ Cài đặt</div>
       <div style="padding:1.5rem;margin-top:auto">
@@ -145,6 +146,52 @@ body{font-family:'Be Vietnam Pro',sans-serif;background:#0f0a04;color:#fff;min-h
           <button class="btn-adm btn-primary" onclick="addProduct()">+ Thêm sản phẩm</button>
         </div>
         <div class="items-grid" id="products-list"></div>
+      </div>
+
+      <!-- NEWS TAB -->
+      <div class="tab-panel" id="tab-news">
+        <div class="panel-header">
+          <h2>Tin tức & Bài viết</h2>
+          <p>Quản lý bài viết tin tức. Bài đăng sẽ hiển thị ở trang Tin tức.</p>
+        </div>
+        <div class="upload-form">
+          <h3>Thêm bài viết mới</h3>
+          <div class="fg-adm">
+            <label>Ảnh bìa bài viết</label>
+            <input type="file" accept="image/*" id="news-img-file" onchange="previewImg(this,'news-img-preview')">
+            <img id="news-img-preview" class="img-preview">
+          </div>
+          <div class="form-row-adm">
+            <div class="fg-adm">
+              <label>Tiêu đề bài viết</label>
+              <input type="text" id="news-title" placeholder="VD: Kinh nghiệm chọn gỗ Lim làm nhà">
+            </div>
+            <div class="fg-adm">
+              <label>Danh mục</label>
+              <select id="news-cat">
+                <option>Kiến thức gỗ</option>
+                <option>Công trình</option>
+                <option>Tin tức</option>
+                <option>Bảng giá</option>
+                <option>Tư vấn</option>
+              </select>
+            </div>
+          </div>
+          <div class="fg-adm">
+            <label>Tóm tắt bài viết</label>
+            <textarea id="news-summary" rows="3" placeholder="Mô tả ngắn về nội dung bài viết..." style="resize:vertical"></textarea>
+          </div>
+          <div class="fg-adm">
+            <label>Nội dung bài viết</label>
+            <textarea id="news-content" rows="8" placeholder="Nhập nội dung đầy đủ của bài viết..." style="resize:vertical"></textarea>
+          </div>
+          <div class="fg-adm">
+            <label>Tác giả</label>
+            <input type="text" id="news-author" placeholder="VD: Đức Cường Wood" value="Lâm Sản Đức Cường">
+          </div>
+          <button class="btn-adm btn-primary" onclick="addNews()">+ Đăng bài viết</button>
+        </div>
+        <div class="items-grid" id="news-list"></div>
       </div>
 
       <!-- GALLERY TAB -->
@@ -298,6 +345,63 @@ function renderProducts(){
     </div>`).join('');
 }
 
+// NEWS
+function getNews(){ return JSON.parse(localStorage.getItem('dc_news')||'[]'); }
+function saveNews(arr){ localStorage.setItem('dc_news',JSON.stringify(arr)); }
+
+function addNews(){
+  const file = document.getElementById('news-img-file').files[0];
+  const title = document.getElementById('news-title').value.trim();
+  const cat = document.getElementById('news-cat').value;
+  const summary = document.getElementById('news-summary').value.trim();
+  const content = document.getElementById('news-content').value.trim();
+  const author = document.getElementById('news-author').value.trim() || 'Lâm Sản Đức Cường';
+  if(!title){ showToast('Vui lòng nhập tiêu đề bài viết'); return; }
+  const date = new Date().toLocaleDateString('vi-VN');
+  const save = (imgSrc) => {
+    const arr = getNews();
+    arr.unshift({id:Date.now(), img:imgSrc, title, cat, summary, content, author, date});
+    saveNews(arr);
+    renderNews();
+    document.getElementById('news-img-file').value='';
+    document.getElementById('news-img-preview').style.display='none';
+    document.getElementById('news-title').value='';
+    document.getElementById('news-summary').value='';
+    document.getElementById('news-content').value='';
+    showToast('Đã đăng bài viết!');
+  };
+  if(file){
+    const reader = new FileReader();
+    reader.onload=e=>save(e.target.result);
+    reader.readAsDataURL(file);
+  } else {
+    save('');
+  }
+}
+
+function deleteNews(id){
+  if(!confirm('Xóa bài viết này?')) return;
+  saveNews(getNews().filter(n=>n.id!==id));
+  renderNews();
+  showToast('Đã xóa');
+}
+
+function renderNews(){
+  const arr = getNews();
+  const el = document.getElementById('news-list');
+  if(!arr.length){ el.innerHTML='<div class="empty-state">Chưa có bài viết nào.<br>Các bài viết mặc định vẫn hiển thị trên trang web.</div>'; return; }
+  el.innerHTML = arr.map(n=>`
+    <div class="item-card">
+      ${n.img ? `<img src="${n.img}" alt="${n.title}">` : `<div style="height:140px;background:var(--dark3);display:flex;align-items:center;justify-content:center;font-size:2rem">📰</div>`}
+      <div class="item-card-body">
+        <div class="item-label">${n.cat}</div>
+        <h4>${n.title}</h4>
+        <p>${n.date} · ${n.author}</p>
+        <button class="btn-adm btn-danger" onclick="deleteNews(${n.id})">Xóa</button>
+      </div>
+    </div>`).join('');
+}
+
 // GALLERY
 function getGallery(){ return JSON.parse(localStorage.getItem('dc_gallery')||'[]'); }
 function saveGallery(arr){ localStorage.setItem('dc_gallery',JSON.stringify(arr)); }
@@ -370,7 +474,7 @@ function changePwd(){
   showToast('Đã đổi mật khẩu!');
 }
 
-function renderAll(){ renderProducts(); renderGallery(); loadSettings(); }
+function renderAll(){ renderProducts(); renderNews(); renderGallery(); loadSettings(); }
 </script>
 </body>
 </html>
